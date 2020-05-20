@@ -1,36 +1,24 @@
-#landlord {
-    user-select: none;
+.waifu {
     position: fixed;
-    left: 30px;
     bottom: 0;
-    width: 280px;
-    height: 250px;
-    z-index: 10000;
+    z-index: 1;
     font-size: 0;
-    transition: all .3s ease-in-out;
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
 }
-
-#live2d {
-    position: relative;
+.waifu:hover {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
 }
-
-.message {
+.waifu-tips {
     opacity: 0;
-    width: 300px;
-    height: auto;
-    margin: auto;
-    padding: 7px;
-    top: -80px;
-    left: -10px;
-    text-align: center;
-    border: 1px solid rgba(255,137,255,.4);
+    margin: -20px 20px;
+    padding: 5px 10px;
+    border: 1px solid rgba(224, 186, 140, 0.62);
     border-radius: 12px;
-    background-color: rgba(255,137,255,.2);
-    box-shadow: 0 3px 15px 2px rgba(255,137,255,.4);
-    font-size: 13px;
-    font-weight: 400;
+    background-color: rgba(236, 217, 188, 0.5);
+    box-shadow: 0 3px 15px 2px rgba(191, 158, 118, 0.2);
     text-overflow: ellipsis;
-    text-transform: uppercase;
     overflow: hidden;
     position: absolute;
     animation-delay: 5s;
@@ -39,23 +27,27 @@
     animation-name: shake;
     animation-timing-function: ease-in-out;
 }
-
-.tool {
+.waifu-tool {
     display: none;
     color: #aaa;
     top: 50px;
     right: 10px;
     position: absolute;
 }
-
-#landlord:hover .tool {
+.waifu:hover .waifu-tool {
     display: block;
 }
-
-@media (max-width: 860px) {
-    #landlord {
-        display: none;
-    }
+.waifu-tool span {
+    display: block;
+    cursor: pointer;
+    color: #5b6c7d;
+    transition: 0.2s;
+}
+.waifu-tool span:hover {
+    color: #34495e;
+}
+.waifu #live2d{
+    position: relative;
 }
 
 @keyframes shake {
