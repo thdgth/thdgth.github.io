@@ -1,5 +1,5 @@
 ﻿# Site settings
-title: GTH's Blog
+title: 天华的博客
 SEOTitle: 天华的博客 | GTH's Blog
 header-img: img/post-bg-desk.jpg
 email: thdgth@163.com
@@ -11,7 +11,7 @@ github_repo: "https://github.com/thdgth/thdgth.github.io.git" # you code reposit
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Goals determine what you going to be!"
+sidebar-about-description: "如果你是对的，你没有必要发脾气；如果你是错的，你没有资格发脾气。"
 sidebar-avatar: /img/about-GTH-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
