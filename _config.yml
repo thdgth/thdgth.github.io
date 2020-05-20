@@ -57,12 +57,11 @@ kramdown:
 
 # 评论系统
 # Disqus（https://disqus.com/）
-disqus:
-  disqus_username: thdgth
+# disqus_username: thdgth
 
 # Gitalk
 gitalk:
-  enable: false    #是否开启Gitalk评论
+  enable: true    #是否开启Gitalk评论
   clientID: 9f94400e0da77d3ff420                            #生成的clientID
   clientSecret: 327aeeb2a08d6982c791f4f9e5fb5fd8ed7d29a7    #生成的clientSecret
   repo: thdgth.github.io    #仓库名称
