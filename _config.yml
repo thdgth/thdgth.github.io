@@ -99,7 +99,7 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "CSDG·GTH",
+        title: "CSDN·GTH",
         href: "https://github.com/thdgth"
     }
 ]
