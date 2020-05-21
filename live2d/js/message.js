@@ -81,18 +81,23 @@ $.ajax({
         });
     }
 });
-var models = null;
-var messages = null;
-$(document).ready(function () {
-    $.ajax({
-        url: '../model/model_list.json',
-        async: false,
-        success: function (data){
-            models = data.models;
-            messages = data.messages;
-        }
-    });
-});
+
+var models;
+var messages;
+
+window.onload = function() {
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            models = json.models;
+            messages = json.messages;
+        }
+    }
+}
 
 (function (){
     var text;
