@@ -83,14 +83,15 @@ $.ajax({
 });
 var models = null;
 var messages = null;
-$.ajax({
-    cache: true,
-    url: '/live2d/model/model_list.json',
-    dataType: "json",
-    success: function (data){
-        models = data.models;
-        messages = data.messages;
-    }
+$(document).ready(function () {
+    $.ajax({
+        url: '../model/model_list.json',
+        async: false,
+        success: function (data){
+            models = data.models;
+            messages = data.messages;
+        }
+    });
 });
 
 (function (){
