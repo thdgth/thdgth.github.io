@@ -16,6 +16,23 @@ function renderTip(template, context) {
     });
 }
 
+var models;
+var messages;
+
+window.onload = function() {
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            models = json.models;
+            messages = json.messages;
+        }
+    }
+};
+
 String.prototype.renderTip = function (context) {
     return renderTip(this, context);
 };
@@ -58,46 +75,29 @@ $('.tool .fui-photo').click(function (){
     window.Live2D.captureFrame = true;
 });
 
-$.ajax({
-    cache: true,
-    url: '/live2d/message.json',
-    dataType: "json",
-    success: function (result){
-        $.each(result.mouseover, function (index, tips){
-            $(tips.selector).mouseover(function (){
-                var text = tips.text;
-                if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                text = text.renderTip({text: $(this).text()});
-                showMessage(text, 3000);
+    $.ajax({
+        cache: true,
+        url: '/live2d/message.json',
+        dataType: "json",
+        success: function (result){
+            $.each(result.mouseover, function (index, tips){
+                $(tips.selector).mouseover(function (){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    text = text.renderTip({text: $(this).text()});
+                    showMessage(text, 3000);
+                });
             });
-        });
-        $.each(result.click, function (index, tips){
-            $(tips.selector).click(function (){
-                var text = tips.text;
-                if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                text = text.renderTip({text: $(this).text()});
-                showMessage(text, 3000);
+            $.each(result.click, function (index, tips){
+                $(tips.selector).click(function (){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    text = text.renderTip({text: $(this).text()});
+                    showMessage(text, 3000);
+                });
             });
-        });
-    }
-});
-
-var models;
-var messages;
-
-window.onload = function() {
-    var url = "/live2d/model/model_list.json";
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function() {
-        if (request.status == 200) {
-            var json = JSON.parse(request.responseText);
-            models = json.models;
-            messages = json.messages;
-        }
-    }
-}
+        }
+    });
 
 (function (){
     var text;
