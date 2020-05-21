@@ -152,3 +152,99 @@ function hideMessage(timeout){
     if (timeout === null) timeout = 5000;
     $('.message').delay(timeout).fadeTo(200, 0);
 }
+
+function initModel(){
+    
+    var modelId = localStorage.getItem('modelId');
+    var modelTexturesId = localStorage.getItem('modelTexturesId');
+    
+    if (modelId == null) {
+        
+        /* 首次访问加载 指定模型 的 指定材质 */
+        
+        var modelId = 1;            // 模型 ID
+        var modelTexturesId = 53    // 材质 ID
+        
+    } loadModel(modelId, modelTexturesId);
+    
+    $.ajax({
+        cache: true,
+        url: '/live2d/message.json',
+        dataType: "json",
+        success: function (result){
+            $.each(result.mouseover, function (index, tips){
+                $(document).on("mouseover", tips.selector, function (){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    text = text.render({text: $(this).text()});
+                    showMessage(text, 3000);
+                });
+            });
+            $.each(result.click, function (index, tips){
+                $(document).on("click", tips.selector, function (){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    text = text.render({text: $(this).text()});
+                    showMessage(text, 3000, true);
+                });
+            });
+            $.each(result.seasons, function (index, tips){
+                var now = new Date();
+                var after = tips.date.split('-')[0];
+                var before = tips.date.split('-')[1] || after;
+                
+                if((after.split('/')[0] <= now.getMonth()+1 && now.getMonth()+1 <= before.split('/')[0]) && 
+                   (after.split('/')[1] <= now.getDate() && now.getDate() <= before.split('/')[1])){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    text = text.render({year: now.getFullYear()});
+                    showMessage(text, 6000, true);
+                }
+            });
+        }
+    });
+}
+
+function loadModel(modelId, modelTexturesId){
+    localStorage.setItem('modelId', modelId);
+    if (modelTexturesId === undefined) modelTexturesId = 0;
+    localStorage.setItem('modelTexturesId', modelTexturesId);
+    loadlive2d('live2d', '/live2d/models/get/?id='+modelId+'-'+modelTexturesId, console.log('live2d','模型 '+modelId+'-'+modelTexturesId+' 加载完成'));
+}
+
+function loadRandModel(){
+    var modelId = localStorage.getItem('modelId');
+    var modelTexturesId = localStorage.getItem('modelTexturesId');
+    
+    var modelTexturesRandMode = 'rand';     // 可选 'rand'(随机), 'switch'(顺序)
+    
+    $.ajax({
+        cache: false,
+        url: '/live2d/models/'+modelTexturesRandMode+'_textures/?id='+modelId+'-'+modelTexturesId,
+        dataType: "json",
+        success: function (result){
+            if (result.textures['id'] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) {
+                showMessage('我还没有其他衣服呢', 3000, true);
+            } else {
+                showMessage('我的新衣服好看嘛', 3000, true);
+            }
+            loadModel(modelId, result.textures['id']);
+        }
+    });
+}
+
+function loadOtherModel(){
+    var modelId = localStorage.getItem('modelId');
+    
+    var modelTexturesRandMode = 'switch';     // 可选 'rand'(随机), 'switch'(顺序)
+    
+    $.ajax({
+        cache: false,
+        url: '/live2d/models/'+modelTexturesRandMode+'/?id='+modelId,
+        dataType: "json",
+        success: function (result){
+            loadModel(result.model['id']);
+            showMessage(result.model['message'], 3000, true);
+        }
+    });
+}
