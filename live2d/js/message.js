@@ -187,7 +187,7 @@ function loadRandModel(){
             else ModelURL = models[numid];
             try{
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
-            }catch(Error e){
+            }catch(err){
                 window.location.reload(false);
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
             }
