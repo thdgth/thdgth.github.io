@@ -16,25 +16,6 @@ function renderTip(template, context) {
     });
 }
 
-var models;
-var messages;
-
-window.onload = function() {
-    var url = "/live2d/model/model_list.json";
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function() {
-        if (request.status == 200) {
-            var json = JSON.parse(request.responseText);
-            models = json.models;
-            messages = json.messages;
-            console.log(models);
-            console.log(messages);
-        }
-    }
-};
-
 String.prototype.renderTip = function (context) {
     return renderTip(this, context);
 };
@@ -172,18 +153,50 @@ function hideMessage(timeout){
     $('.message').delay(timeout).fadeTo(200, 0);
 }
 
+function getModels() {
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            return json.models;
+        }
+    }
+    return null;
+}
+
+function getMessages() {
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            return json.messages;
+        }
+    }
+    return null;
+}
+
 var numid;
 
 function loadRandModel(){
+    var models = getModels();
+    var messages = getMessages();
     numid = Math.round(Math.random() * 6);
     var ModelURL = null;
     if (Array.isArray(models[numid]))
         ModelURL = models[numid][0];
     else ModelURL = models[numid];
     loadlive2d('live2d', "/live2d/model/" + ModelURL + "index.json");
+    showMessage(messages[numid], 3000, true);
 }
 
 function loadRandModelClothes(){
+    var models = getModels();
     if (Array.isArray(models[numid])){
         var Length = models[numid].length;
         var clothid = Math.round(Math.random() * Length);
