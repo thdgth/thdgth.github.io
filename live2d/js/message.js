@@ -29,6 +29,7 @@ window.onload = function() {
             var json = JSON.parse(request.responseText);
             models = json.models;
             messages = json.messages;
+            console.log(models);
         }
     }
 };
