@@ -161,6 +161,7 @@ function getModels() {
     request.onload = function() {
         if (request.status == 200) {
             var json = JSON.parse(request.responseText);
+            console.log(json.models);
             return json.models;
         }
     }
@@ -175,6 +176,7 @@ function getMessages() {
     request.onload = function() {
         if (request.status == 200) {
             var json = JSON.parse(request.responseText);
+            console.log(json.messages);
             return json.messages;
         }
     }
@@ -185,7 +187,9 @@ var numid;
 
 function loadRandModel(){
     var models = getModels();
+    console.log(models);
     var messages = getMessages();
+    console.log(messages);
     numid = Math.round(Math.random() * 6);
     var ModelURL = null;
     if (Array.isArray(models[numid]))
