@@ -30,6 +30,7 @@ window.onload = function() {
             models = json.models;
             messages = json.messages;
             console.log(models);
+            console.log(messages);
         }
     }
 };
