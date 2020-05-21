@@ -197,8 +197,8 @@ function loadRandModel(){
             }catch(err){
                 loadJs('/live2d/js/live2d.js');
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+                showMessage(messages[numid], 3000, true);
             }
-            showMessage(messages[numid], 3000, true);
         }
     }
 }
