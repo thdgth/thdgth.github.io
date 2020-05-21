@@ -185,10 +185,12 @@ function loadRandModel(){
             if (Array.isArray(models[numid]))
                 ModelURL = models[numid][0];
             else ModelURL = models[numid];
-            if (typeof Live2DFramework == "undefined")
-                window.location.reload(false);
-            else
+            try{
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+            }catch(Error e){
+                window.location.reload(false);
+                loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+            }
             showMessage(messages[numid], 3000, true);
         }
     }
