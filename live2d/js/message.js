@@ -185,7 +185,10 @@ function loadRandModel(){
             if (Array.isArray(models[numid]))
                 ModelURL = models[numid][0];
             else ModelURL = models[numid];
-            loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+            if (typeof Live2DFramework == "undefined")
+                window.location.reload(false);
+            else
+                loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
             showMessage(messages[numid], 3000, true);
         }
     }
@@ -204,6 +207,7 @@ function loadRandModelClothes(){
                 var Length = models[numid].length;
                 var clothid = Math.round(Math.random() * Length);
                 var ModelURL = models[numid][clothid];
+                window.location.reload(false);
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
                 showMessage('我的新衣服好看嘛', 3000, true);
             }else{
