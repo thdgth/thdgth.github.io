@@ -24,6 +24,40 @@ $(document).on('copy', function (){
     showMessage('你都复制了些什么呀，转载要记得加上出处哦~~', 5000);
 });
 
+$('.tool .fui-home').click(function (){
+    //window.location = 'https://www.fghrsh.net/';
+    window.location = window.location.protocol+'//'+window.location.hostname+'/'
+});
+
+$('.tool .fui-eye').click(function (){
+    loadOtherModel();
+});
+
+$('.tool .fui-chat').click(function (){
+    showHitokoto();
+});
+
+$('.tool .fui-user').click(function (){
+    loadRandModel();
+});
+
+$('.tool .fui-info-circle').click(function (){
+    //window.open('https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02');
+    window.open('https://www.fghrsh.net/post/123.html');
+});
+
+$('.tool .fui-cross').click(function (){
+    //sessionStorage.setItem('waifu-dsiplay', 'none');
+    showMessage('愿你有一天能与重要的人重逢', 1300, true);
+    window.setTimeout(function() {$('.landlord').hide();}, 1300);
+});
+
+$('.tool .fui-photo').click(function (){
+    showMessage('照好了嘛，是不是很可爱呢？', 5000, true);
+    window.Live2D.captureName = 'Pio.png';
+    window.Live2D.captureFrame = true;
+});
+
     $.ajax({
         cache: true,
         url: '/live2d/message.json',
