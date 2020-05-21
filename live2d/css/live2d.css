@@ -274,8 +274,8 @@
 }
 @font-face {
   font-family: 'Flat-UI-Icons';
-  src: url('/ui/flat-ui-icons-regular.eot');
-  src: url('/ui/flat-ui-icons-regular.eot?#iefix') format('embedded-opentype'), url('/ui/flat-ui-icons-regular.woff') format('woff'), url('/ui/flat-ui-icons-regular.ttf') format('truetype'), url('/ui/flat-ui-icons-regular.svg#flat-ui-icons-regular') format('svg');
+  src: url('/live2d/ui/flat-ui-icons-regular.eot');
+  src: url('/live2d/ui/flat-ui-icons-regular.eot?#iefix') format('embedded-opentype'), url('/live2d/ui/flat-ui-icons-regular.woff') format('woff'), url('/live2d/ui/flat-ui-icons-regular.ttf') format('truetype'), url('/live2d/ui/flat-ui-icons-regular.svg#flat-ui-icons-regular') format('svg');
 }
 [class^="fui-"],
 [class*="fui-"] {
