@@ -161,23 +161,8 @@ function getModels() {
     request.onload = function() {
         if (request.status == 200) {
             var json = JSON.parse(request.responseText);
-            console.log(json.models);
+            console.log("DEBUG:"+json.models);
             return json.models;
-        }
-    }
-    return null;
-}
-
-function getMessages() {
-    var url = "/live2d/model/model_list.json";
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function() {
-        if (request.status == 200) {
-            var json = JSON.parse(request.responseText);
-            console.log(json.messages);
-            return json.messages;
         }
     }
     return null;
@@ -186,28 +171,44 @@ function getMessages() {
 var numid;
 
 function loadRandModel(){
-    var models = getModels();
-    console.log(models);
-    var messages = getMessages();
-    console.log(messages);
-    numid = Math.round(Math.random() * 6);
-    var ModelURL = null;
-    if (Array.isArray(models[numid]))
-        ModelURL = models[numid][0];
-    else ModelURL = models[numid];
-    loadlive2d('live2d', "/live2d/model/" + ModelURL + "index.json");
-    showMessage(messages[numid], 3000, true);
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            var models = json.models;
+            var messages = json.messages;
+            numid = Math.round(Math.random() * 6);
+            var ModelURL = null;
+            if (Array.isArray(models[numid]))
+                ModelURL = models[numid][0];
+            else ModelURL = models[numid];
+            loadlive2d('live2d', "/live2d/model/" + ModelURL + "index.json");
+            showMessage(messages[numid], 3000, true);
+        }
+    }
 }
 
 function loadRandModelClothes(){
-    var models = getModels();
-    if (Array.isArray(models[numid])){
-        var Length = models[numid].length;
-        var clothid = Math.round(Math.random() * Length);
-        var ModelURL = models[numid][clothid];
-        loadlive2d('live2d', "/live2d/model/" + ModelURL + "index.json");
-        showMessage('我的新衣服好看嘛', 3000, true);
-    }else{
-        showMessage('我还没有其他衣服呢', 3000, true);
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            var models = json.models;
+            if (Array.isArray(models[numid])){
+                var Length = models[numid].length;
+                var clothid = Math.round(Math.random() * Length);
+                var ModelURL = models[numid][clothid];
+                loadlive2d('live2d', "/live2d/model/" + ModelURL + "index.json");
+                showMessage('我的新衣服好看嘛', 3000, true);
+            }else{
+                showMessage('我还没有其他衣服呢', 3000, true);
+            }
+        }
     }
 }
