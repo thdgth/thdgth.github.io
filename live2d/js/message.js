@@ -54,7 +54,7 @@ $('.tool .fui-cross').click(function (){
 
 $('.tool .fui-photo').click(function (){
     showMessage('照好了嘛，是不是很可爱呢？', 5000, true);
-    window.Live2D.captureName = 'Pio.png';
+    window.Live2D.captureName = 'live2d.png';
     window.Live2D.captureFrame = true;
 });
 
@@ -153,6 +153,13 @@ function hideMessage(timeout){
     $('.message').delay(timeout).fadeTo(200, 0);
 }
 
+function loadJs(file)
+{
+    var head = $("head").remove("script[role='reload']");
+    $("<scri"+"pt>"+"</scr"+"ipt>").attr({ 
+    role:'reload',src:file,type:'text/javascript'}).appendTo(head);
+}
+
 function getModels() {
     var url = "/live2d/model/model_list.json";
     var request = new XMLHttpRequest();
@@ -188,7 +195,7 @@ function loadRandModel(){
             try{
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
             }catch(err){
-                window.location.reload(false);
+                loadJs('/live2d/js/live2d.js');
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
             }
             showMessage(messages[numid], 3000, true);
@@ -209,7 +216,7 @@ function loadRandModelClothes(){
                 var Length = models[numid].length;
                 var clothid = Math.round(Math.random() * Length);
                 var ModelURL = models[numid][clothid];
-                window.location.reload(false);
+                loadJs('/live2d/js/live2d.js');
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
                 showMessage('我的新衣服好看嘛', 3000, true);
             }else{
