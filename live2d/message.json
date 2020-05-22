@@ -5,7 +5,7 @@
             "text": ["要看看<span style=\"color:#0099cc;\">{text}</span> 这篇文章么？"]
         },
         {
-            "selector": ".catalog-body",
+            "selector": ".catalog",
             "text": ["要跳到<span style=\"color:#0099cc;\">{text}</span> 吗？"]
         },
         {
