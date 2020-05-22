@@ -202,8 +202,7 @@ function loadRandModel(){
             var json = JSON.parse(request.responseText);
             var models = json.models;
             var messages = json.messages;
-            var length = messages.length;
-            console.log("总共有"+length+"种看板娘");
+            var length = models.length - 1;
             var randid;
             do{
                 randid = Math.round(Math.random() * length);
@@ -230,7 +229,7 @@ function loadRandModelClothes(){
             var json = JSON.parse(request.responseText);
             var models = json.models;
             if (Array.isArray(models[numid])){
-                var Length = models[numid].length;
+                var Length = models[numid].length - 1;
                 var randid;
                 do{
                     randid = Math.round(Math.random() * Length);
