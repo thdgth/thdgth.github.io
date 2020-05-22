@@ -160,35 +160,6 @@ function loadJs(file)
     role:'reload',src:file,type:'text/javascript'}).appendTo(head);
 }
 
-function initModels() {
-    var url = "/live2d/model/model_list.json";
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function() {
-        if (request.status == 200) {
-            var json = JSON.parse(request.responseText);
-            var models = json.models;
-            var model_length = models.length;
-            for( i = 0; i < model_length; i++ ){
-                var ModelURL;
-                if (Array.isArray(models[i])){
-                    var model_frame_length = models[i].length;
-                    for( j = 0; j < model_frame_length; j++ ){
-                        ModelURL = models[i][j];
-                        loadJs('/live2d/js/live2d.js');
-                        loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
-                    }
-                }else{
-                    ModelURL = models[i];
-                    loadJs('/live2d/js/live2d.js');
-                    loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
-                }
-            }
-        }
-    }
-}
-
 var numid;
 var clothid;
 
