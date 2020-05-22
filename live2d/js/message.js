@@ -202,7 +202,8 @@ function loadRandModel(){
             var json = JSON.parse(request.responseText);
             var models = json.models;
             var messages = json.messages;
-            var length = models.length;
+            var length = messages.length;
+            console.log("总共有"+length+"种看板娘");
             var randid;
             do{
                 randid = Math.round(Math.random() * length);
