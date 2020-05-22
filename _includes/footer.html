@@ -240,8 +240,8 @@
             n = $(this).prop('tagName').toLowerCase();
             i = "#"+$(this).prop('id');
             t = $(this).text();
-            c = $('<a class = "category" href="'+i+'" rel="nofollow">'+t+'</a>');
-            l = $('<li class="'+n+'_nav"></li>').append(c);
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav catalog-tip"></li>').append(c);
             $(selector).append(l);
         });
         return true;    
