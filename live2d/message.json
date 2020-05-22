@@ -13,7 +13,7 @@
             "text": ["要看看标签'<span style=\"color:#0099cc;\">{text}</span>'下有哪些文章吗？"]
         },
         {
-            "selector": ".list-inline a",
+            "selector": ".list-friend a",
             "text": ["要去拜访我的朋友<span style=\"color:#0099cc;\">{text}</span>吗？"]
         },
         {
