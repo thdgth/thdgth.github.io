@@ -190,6 +190,7 @@ function initModels() {
 }
 
 var numid;
+var clothid;
 
 function loadRandModel(){
     var url = "/live2d/model/model_list.json";
@@ -202,7 +203,11 @@ function loadRandModel(){
             var models = json.models;
             var messages = json.messages;
             var length = models.length;
-            numid = Math.round(Math.random() * length);
+            var randid;
+            do{
+                randid = Math.round(Math.random() * length);
+            }while(numid == randid);
+            numid = randid;
             var ModelURL = null;
             if (Array.isArray(models[numid]))
                 ModelURL = models[numid][0];
@@ -225,7 +230,11 @@ function loadRandModelClothes(){
             var models = json.models;
             if (Array.isArray(models[numid])){
                 var Length = models[numid].length;
-                var clothid = Math.round(Math.random() * Length);
+                var randid;
+                do{
+                    randid = Math.round(Math.random() * Length);
+                }while(clothid == randid);
+                clothid = randid;
                 var ModelURL = models[numid][clothid];
                 loadJs('/live2d/js/live2d.js');
                 loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
