@@ -9,12 +9,24 @@
             "text": ["要跳到<span style=\"color:#0099cc;\">{text}</span> 吗？"]
         },
         {
+            "selector": ".tags a",
+            "text": ["要看看标签'<span style=\"color:#0099cc;\">{text}</span>'下有哪些文章吗？"]
+        },
+        {
+            "selector": ".list-inline a",
+            "text": ["要去拜访我的朋友<span style=\"color:#0099cc;\">{text}</span>吗？"]
+        },
+        {
             "selector": "#tor_show",
             "text": ["翻页比较麻烦吗，点击可以显示这篇文章的目录呢"]
         },
         {
-            "selector": ".rollbar a",
+            "selector": ".gt-header-textarea",
             "text": ["想要去评论些什么吗？"]
+        },
+        {
+            "selector": ".gt-btn-preview",
+            "text": ["想要看看写的评论里的代码会显示成什么样吗？"]
         },
         {
             "selector": ".fui-home",
@@ -42,19 +54,47 @@
         },
         {
             "selector": ".fui-cross",
-            "text": ["到了要说再见的时候了吗"]
+            "text": ["到了要说再见的时候了吗QAQ"]
         },
         {
             "selector": "#night_mode",
-            "text": ["深夜时要爱护眼睛呀"]
+            "text": ["深夜时要爱护眼睛呀+v+"]
         },
         {
             "selector": ".rollbar",
-            "text": ["回到开始的地方吧"]
+            "text": ["回到开始的地方吧~"]
         },
         {
-            "selector": "#csubmit",
-            "text": ["要[提交]^(Commit)了吗，首次评论需要审核，请耐心等待~"]
+            "selector": ".gt-btn-public",
+            "text": ["要提交评论了吗，首次评论需要审核，请耐心等待~"]
+        },
+        {
+            "selector": ".fa-jianshu",
+            "text": ["要去看看我的简书首页吗？"]
+        },
+        {
+            "selector": ".fa-twitter",
+            "text": ["要去看看我的推特首页吗？记得要翻墙哦~"]
+        },
+        {
+            "selector": ".fa-zhihu",
+            "text": ["要去看看我的知乎首页吗？"]
+        },
+        {
+            "selector": ".fa-weibo",
+            "text": ["要去看看我的微博首页吗？"]
+        },
+        {
+            "selector": ".fa-facebook",
+            "text": ["要去看看我的脸书首页吗？记得要翻墙哦~"]
+        },
+        {
+            "selector": ".fa-github",
+            "text": ["要去看看我的GitHub首页吗？"]
+        },
+        {
+            "selector": ".fa-csdn",
+            "text": ["要去看看我的CSDN首页吗？"]
         },
         {
             "selector": ".ImageBox",
