@@ -191,7 +191,8 @@ var clothid;
 
 function clearCanvas(id)  
 {  
-    var cxt=document.getElementById(id).getContext("2d");
+    var c=document.getElementById(id);  
+    var cxt=c.getContext("2d");  
     cxt.clearRect(0,0,c.width,c.height);  
 }  
 
