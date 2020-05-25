@@ -64,12 +64,21 @@ $('.tool .fui-photo').click(function (){
         dataType: "json",
         success: function (result){
             $.each(result.mouseover, function (index, tips){
-                $(tips.selector).mouseover(function (){
-                    var text = tips.text;
-                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                    text = text.renderTip({text: $(this).text()});
-                    showMessage(text, 3000);
-                });
+                if($(tips.selector).is('.class')){
+                    $(tips.selector).mouseover(function (){
+                        var text = tips.text;
+                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                        text = text.renderTip({text: $(this).text()});
+                        showMessage(text, 3000);
+                    });
+                }else{
+                    $(document).on('mouseover', tips.selector, function(e){
+                        var text = tips.text;
+                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                        text = text.renderTip({text: $(this).text()});
+                        showMessage(text, 3000);
+                    });
+                }
             });
             $.each(result.click, function (index, tips){
                 $(tips.selector).click(function (){
@@ -158,28 +167,6 @@ function loadJs(file)
     var head = $("head").remove("script[role='reload']");
     $("<scri"+"pt>"+"</scr"+"ipt>").attr({ 
     role:'reload',src:file,type:'text/javascript'}).appendTo(head);
-}
-
-function loadModels(){
-    var url = "/live2d/model/model_list.json";
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function() {
-        if (request.status == 200) {
-            var json = JSON.parse(request.responseText);
-            var models = json.models;
-            var models_length = models.length - 1;
-            for(var i = 0; i < models_length; i++){
-                if(Array.isArray(models[i])){
-                    var models_clothes_length = models[i].length - 1;
-                    for(var j = 0; j < models_clothes_length; j++)
-                        loadModel('live2d', "/live2d/model/" + models[i][j] + "/index.json");
-                }else
-                    loadModel('live2d', "/live2d/model/" + models[i] + "/index.json");
-            }
-        }
-    }
 }
 
 var numid;
