@@ -196,7 +196,6 @@ function loadRandModel(){
             else ModelURL = models[numid];
             var ModelRequest = new XMLHttpRequest();
             ModelRequest.open("get", ModelURL);
-            ModelRequest.send(null);
             ModelRequest.onload = function() {
                 loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
                 showMessage(messages[numid], 3000, true);
@@ -224,7 +223,6 @@ function loadRandModelClothes(){
                 var ModelURL = models[numid][clothid];
                 var ModelRequest = new XMLHttpRequest();
                 ModelRequest.open("get", ModelURL);
-                ModelRequest.send(null);
                 ModelRequest.onload = function() {
                     loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
                     showMessage('我的新衣服好看嘛', 3000, true);
