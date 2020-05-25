@@ -184,7 +184,7 @@ function initModels(){
             var json = JSON.parse(request.responseText);
             var models = json.models;
             for(i = 0; i < models.length - 1; i++){
-                if(isArray(models[i])){
+                if(Array.isArray(models[i])){
                     for(j = 0; j < models[i].length - 1; j++){
                         var ModelURL = models[i][j];
                         loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json", console.log('live2d', '模型' + i + '.' + j + '加载完毕'));
