@@ -188,15 +188,16 @@ function loadScript(jsfile, l2dfile) {
 
 var numid; 
 var clothid;
+var canvasid = "live2d";
 
-function refreshElement()  
+function refreshElement(oldid, newid)  
 {
-    var node = document.getElementById("live2d");
+    var node = document.getElementById(oldid);
     var next = node.nextSibling;
     var list = document.getElementById("landlord");
     list.removeChild(node);
     var new_node = document.createElement("CANVAS");
-    new_node.id = "live2d";
+    new_node.id = newid;
     new_node.class = "live2d";
     new_node.width = 280;
     new_node.height = 250;
@@ -224,8 +225,10 @@ function loadRandModel(){
                 ModelURL = models[numid][0];
             else ModelURL = models[numid];
             //loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
-            refreshElement();
-            loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+            var newid = "live2d" + Math.random();
+            refreshElement(canvasid, newid);
+            canvasid = newid;
+            loadlive2d(newid, "/live2d/model/" + ModelURL + "/index.json");
             showMessage(messages[numid], 3000, true);
         }
     }
@@ -249,8 +252,10 @@ function loadRandModelClothes(){
                 clothid = randid;
                 var ModelURL = models[numid][clothid];
                 //loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
-                refreshElement();
-                loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+                var newid = "live2d" + Math.random();
+                refreshElement(canvasid, newid);
+                canvasid = newid;
+                loadlive2d(newid, "/live2d/model/" + ModelURL + "/index.json");
                 showMessage('我的新衣服好看嘛', 3000, true);
             }else{
                 showMessage('我还没有其他衣服呢', 3000, true);
