@@ -187,15 +187,18 @@ function initModels(){
                 if(Array.isArray(models[i])){
                     for(j = 0; j < models[i].length - 1; j++){
                         var ModelURL = models[i][j];
-                        loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json", console.log('live2d', '模型' + i + '.' + j + '加载完毕'));
+                        loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
+                        console.log('live2d', '模型' + i + '.' + j + '加载完毕');
                     }
                 }else{
                     var ModelURL = models[i];
-                    loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json", console.log('live2d', '模型' + i + '加载完毕'));
+                    loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
+                    console.log('live2d', '模型' + i + '加载完毕');
                 }
             }
         }
     }
+    loadRandModel();
 }
 
 function loadRandModel(){
