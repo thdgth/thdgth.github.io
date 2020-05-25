@@ -174,6 +174,30 @@ function hideMessage(timeout){
 var numid; 
 var clothid;
 
+function initModels(){
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            var models = json.models;
+            for(i = 0; i < models.length - 1; i++){
+                if(isArray(models[i])){
+                    for(j = 0; j < models[i].length - 1; j++){
+                        var ModelURL = models[i][j];
+                        loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json", console.log('live2d', '模型' + i + '.' + j + '加载完毕'));
+                    }
+                }else{
+                    var ModelURL = models[i];
+                    loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json", console.log('live2d', '模型' + i + '加载完毕'));
+                }
+            }
+        }
+    }
+}
+
 function loadRandModel(){
     var url = "/live2d/model/model_list.json";
     var request = new XMLHttpRequest();
