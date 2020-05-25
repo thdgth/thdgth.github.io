@@ -25,6 +25,10 @@
             "text": ["想要去评论些什么吗？"]
         },
         {
+            "selector": ".gt-btn-login",
+            "text": ["要登录后才可以提交评论哦~"]
+        },
+        {
             "selector": ".gt-btn-preview",
             "text": ["想要看看写的评论里的代码会显示成什么样吗？"]
         },
