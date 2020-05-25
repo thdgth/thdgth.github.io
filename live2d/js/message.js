@@ -178,6 +178,18 @@ function loadJs(file)
     role:'reload',src:file,type:'text/javascript'}).appendTo(head);
 }
 
+function loadScript(jsfile, l2dfile) {
+    var script = document.createElement('script');
+    script.setAttribute('type','text/javascript');
+    script.src= jsfile;
+    script.onreadystatechange = function() {
+        if(this.readyState === 'loaded' || this.readyState === 'complete') {
+            loadlive2d('live2d', l2dfile);
+        }
+    }
+    appendChild(script);
+}
+
 var numid; 
 var clothid;
 
@@ -201,8 +213,9 @@ function loadRandModel(){
             if (Array.isArray(models[numid]))
                 ModelURL = models[numid][0];
             else ModelURL = models[numid];
-            loadJs('/live2d/js/live2d.js');
-            loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+            loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
+            //loadJs('/live2d/js/live2d.js');
+            //loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
             showMessage(messages[numid], 3000, true);
         }
     }
@@ -225,8 +238,9 @@ function loadRandModelClothes(){
                 }while(clothid == randid);
                 clothid = randid;
                 var ModelURL = models[numid][clothid];
-                loadJs('/live2d/js/live2d.js');
-                loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
+                loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
+                //loadJs('/live2d/js/live2d.js');
+                //loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
                 showMessage('我的新衣服好看嘛', 3000, true);
             }else{
                 showMessage('我还没有其他衣服呢', 3000, true);
