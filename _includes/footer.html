@@ -124,34 +124,25 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
-<div id="page_end_html">
-        <div id="page_end_html">
-        <link rel="stylesheet" type="text/css" href="https://files.cnblogs.com/files/csu-lmw/flat-ui.min.css"/>
-<head>
-    
-    <title>Live2D</title>
-    
-    <link href="https://files.cnblogs.com/files/csu-lmw/waifu1.css" rel="stylesheet" type="text/css">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-<link href="https://files.cnblogs.com/files/csu-lmw/waifu1.css" rel="stylesheet" type="text/css">
-    <div class="waifu" id="waifu">
-        <div class="waifu-tips" style="opacity: 1;"></div>
-        <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
-        <div class="waifu-tool">
-            <span class="fui-home"></span>
-            <span class="fui-chat"></span>
-            <span class="fui-eye"></span>
-            <span class="fui-user"></span>
-            <span class="fui-photo"></span>
-            <span class="fui-info-circle"></span>
-            <span class="fui-cross"></span>
-        </div>
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <!--<span class="fui-photo"></span>-->
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
     </div>
-    <script src="https://files.cnblogs.com/files/csu-lmw/live2d1.js"></script>
-    <script src="https://files.cnblogs.com/files/csu-lmw/waifu-tips_.js"></script>
-    <script type="text/javascript">initModel()</script>
+</div>
+<script type="text/javascript" src="/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="/live2d/js/message.js"></script>
+<script type="text/javascript">
+    //载入人物
+    loadRandModel();
+</script>
 
 <!-- Service Worker -->
 {% if site.service-worker %}
