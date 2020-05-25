@@ -182,8 +182,8 @@ function loadScript(jsfile, l2dfile) {
     var script = document.createElement('script');
     script.setAttribute('type','text/javascript');
     script.src= jsfile;
-    script.onreadystatechange = function() {
-        if(this.readyState === 'loaded' || this.readyState === 'complete') {
+    script.onload = script.onreadystatechange = function() {
+        if(!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
             loadlive2d('live2d', l2dfile);
         }
     }
