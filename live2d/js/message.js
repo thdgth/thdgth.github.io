@@ -172,7 +172,8 @@ function hideMessage(timeout){
 }
 
 function loadScript(jsfile, l2dfile) {
-    document.getElementsByTagName('head')[0].removeChild(document.getElementById("live2d_js"));
+    if(document.getElementById("live2d_js") != null)
+        document.getElementsByTagName('head')[0].removeChild(document.getElementById("live2d_js"));
     var script = document.createElement('script');
     script.setAttribute('type','text/javascript');
     script.id = "live2d_js";
