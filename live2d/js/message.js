@@ -188,7 +188,7 @@ function loadScript(jsfile, l2dfile) {
 
 var numid; 
 var clothid;
-var first = 0;
+var first = 1;
 
 function clearCanvas(id)  
 {  
@@ -218,10 +218,9 @@ function loadRandModel(){
                 ModelURL = models[numid][0];
             else ModelURL = models[numid];
             //loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
-            if(first == 0){
+            if(first == 0)
                 clearCanvas('live2d');
-                first = 1;
-            }
+            first = 0;
             loadlive2d('live2d', "/live2d/model/" + ModelURL + "/index.json");
             showMessage(messages[numid], 3000, true);
         }
