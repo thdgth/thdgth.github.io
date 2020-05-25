@@ -174,6 +174,42 @@ function hideMessage(timeout){
 var numid; 
 var clothid;
 
+function loadpngs(url){
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            var textures = json.textures;
+            var loadImg = [];
+            for(var i = 0; i < textures.length - 1; i++)
+                loadImg.push(url.substring(0, url.lastIndexOf('/')) + '/' + textures[i]);
+            var imgsNum = loadImg.length;
+            var nowNum = 0;
+            var nowPercentage = 0; // 用于显示加载每一张图片之后，能够给出百分比
+            // 通过for循环，针对loadImg整个数组进行遍历
+            for (var i = 0; i < imgsNum; i++) {
+                
+                // 每一次i变化之后，都需要执行这样的内容 - 创建一个img对象，将img对象的src设置为相应的图片地址
+                var newImg = new Image();
+                newImg.src = loadImg[i];
+             
+                // 每一张图片加载完成之后，都可以执行相应的功能，比如我们在制作loading条时，希望每加载一张图片之后就能够将当前进度显示出来，就可以用这个方法
+                newImg.onload = (function() {
+                    // 一张图片加载完毕之后执行的功能 - 通常是为了控制进度条
+                    nowNum++;
+                    if (nowNum == imgsNum) {
+                        // 加载完成一张图片之后，我们还可以判断是否完成了所有图片的加载，如果完成再执行相应的内容
+                    };
+                    nowPercentage = nowNum / imgsNum * 100;
+                    console.log(nowPercentage + '%');
+                })();
+            };
+        }
+    }
+}
+
 function initModels(){
     var url = "/live2d/model/model_list.json";
     var request = new XMLHttpRequest();
@@ -183,22 +219,21 @@ function initModels(){
         if (request.status == 200) {
             var json = JSON.parse(request.responseText);
             var models = json.models;
-            for(i = 0; i < models.length - 1; i++){
+            for(var i = 0; i < models.length - 1; i++){
                 if(Array.isArray(models[i])){
-                    for(j = 0; j < models[i].length - 1; j++){
+                    for(var j = 0; j < models[i].length - 1; j++){
                         var ModelURL = models[i][j];
-                        loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
-                        console.log('live2d', '模型' + i + '.' + j + '加载完毕');
+                        console.log('live2d', '加载模型' + i + '.' + j);
+                        loadpngs("/live2d/model/" + ModelURL + "/index.json");
                     }
                 }else{
                     var ModelURL = models[i];
-                    loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
-                    console.log('live2d', '模型' + i + '加载完毕');
+                    console.log('live2d', '加载模型' + i);
+                    loadpngs("/live2d/model/" + ModelURL + "/index.json");
                 }
             }
         }
     }
-    loadRandModel();
 }
 
 function loadRandModel(){
