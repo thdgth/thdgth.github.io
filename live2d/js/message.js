@@ -187,7 +187,7 @@ function loadScript(jsfile, l2dfile) {
             loadlive2d('live2d', l2dfile);
         }
     }
-    appendChild(script);
+    document.appendChild(script);
 }
 
 var numid; 
