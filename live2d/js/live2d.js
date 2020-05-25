@@ -6190,7 +6190,7 @@ default = o;
         })
     },
     o.prototype.release = function(t) {
-        var i = Live2DFramework.getPlatformManager();
+        var i = n.Live2DFramework.getPlatformManager();
         t.deleteTexture(i.texture)
     },
     o.prototype.preloadMotionGroup = function(t) {

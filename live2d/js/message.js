@@ -171,38 +171,8 @@ function hideMessage(timeout){
     $('.message').delay(timeout).fadeTo(200, 0);
 }
 
-function loadScript(jsfile, l2dfile) {
-    if(document.getElementById("live2d_js") != null)
-        document.getElementsByTagName('head')[0].removeChild(document.getElementById("live2d_js"));
-    var script = document.createElement('script');
-    script.setAttribute('type','text/javascript');
-    script.id = "live2d_js";
-    script.src = jsfile;
-    script.onload = script.onreadystatechange = function() {
-        if(!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
-            loadlive2d('live2d', l2dfile);
-        }
-    }
-    document.getElementsByTagName('head')[0].appendChild(script);
-}
-
 var numid; 
 var clothid;
-var canvasid = "live2d";
-
-function refreshElement(oldid, newid)  
-{
-    var node = document.getElementById(oldid);
-    var next = node.nextSibling;
-    var list = document.getElementById("landlord");
-    list.removeChild(node);
-    var new_node = document.createElement("CANVAS");
-    new_node.id = newid;
-    new_node.class = "live2d";
-    new_node.width = 280;
-    new_node.height = 250;
-    list.insertBefore(new_node, next);
-}  
 
 function loadRandModel(){
     var url = "/live2d/model/model_list.json";
@@ -224,11 +194,7 @@ function loadRandModel(){
             if (Array.isArray(models[numid]))
                 ModelURL = models[numid][0];
             else ModelURL = models[numid];
-            //loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
-            var newid = "live2d" + Math.random();
-            refreshElement(canvasid, newid);
-            canvasid = newid;
-            loadlive2d(newid, "/live2d/model/" + ModelURL + "/index.json");
+            loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
             showMessage(messages[numid], 3000, true);
         }
     }
@@ -251,11 +217,7 @@ function loadRandModelClothes(){
                 }while(clothid == randid);
                 clothid = randid;
                 var ModelURL = models[numid][clothid];
-                //loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
-                var newid = "live2d" + Math.random();
-                refreshElement(canvasid, newid);
-                canvasid = newid;
-                loadlive2d(newid, "/live2d/model/" + ModelURL + "/index.json");
+                loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
                 showMessage('我的新衣服好看嘛', 3000, true);
             }else{
                 showMessage('我还没有其他衣服呢', 3000, true);
