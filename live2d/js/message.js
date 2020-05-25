@@ -209,7 +209,8 @@ function loadRandModel(){
             if (Array.isArray(models[numid]))
                 ModelURL = models[numid][0];
             else ModelURL = models[numid];
-            loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
+            //loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
+            loadlive2d('live2d' + Math.random(), "/live2d/model/" + ModelURL + "/index.json");
             showMessage(messages[numid], 3000, true);
         }
     }
@@ -232,7 +233,8 @@ function loadRandModelClothes(){
                 }while(clothid == randid);
                 clothid = randid;
                 var ModelURL = models[numid][clothid];
-                loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
+                //loadScript('/live2d/js/live2d.js',"/live2d/model/" + ModelURL + "/index.json");
+                loadlive2d('live2d' + Math.random(), "/live2d/model/" + ModelURL + "/index.json");
                 showMessage('我的新衣服好看嘛', 3000, true);
             }else{
                 showMessage('我还没有其他衣服呢', 3000, true);
