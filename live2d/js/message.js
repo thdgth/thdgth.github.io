@@ -224,8 +224,8 @@ function load_callback(){
                 drawArc(nowPercentage * 360);
             })();
         }
+        loadRandModel();
     }
-    loadRandModel();
 }
 
 function drawArc(deg) {
