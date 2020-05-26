@@ -173,6 +173,8 @@ function hideMessage(timeout){
 
 var numid; 
 var clothid;
+var modelnums;
+var loadImg = [];
 
 function loadpngs(url){
     var request = new XMLHttpRequest();
@@ -182,9 +184,42 @@ function loadpngs(url){
         if (request.status == 200) {
             var json = JSON.parse(request.responseText);
             var textures = json.textures;
-            var loadImg = [];
             for(var i = 0; i < textures.length - 1; i++)
                 loadImg.push(url.substring(0, url.lastIndexOf('/')) + '/' + textures[i]);
+            modelnums--;
+        }
+    }
+}
+
+function initModels(){
+    var url = "/live2d/model/model_list.json";
+    var request = new XMLHttpRequest();
+    request.open("get", url);
+    request.send(null);
+    request.onload = function() {
+        if (request.status == 200) {
+            var json = JSON.parse(request.responseText);
+            var models = json.models;
+            modelnums = models.length - 1;
+            for(var i = 0; i < models.length - 1; i++){
+                if(Array.isArray(models[i])){
+                    modelnums += models[i].length - 2;
+                }
+            }
+            for(var i = 0; i < models.length - 1; i++){
+                if(Array.isArray(models[i])){
+                    for(var j = 0; j < models[i].length - 1; j++){
+                        var ModelURL = models[i][j];
+                        console.log('live2d', '加载模型' + i + '.' + j);
+                        loadpngs("/live2d/model/" + ModelURL + "/index.json");
+                    }
+                }else{
+                    var ModelURL = models[i];
+                    console.log('live2d', '加载模型' + i);
+                    loadpngs("/live2d/model/" + ModelURL + "/index.json");
+                }
+            }
+            while(modelnums > 0);
             var imgsNum = loadImg.length;
             var nowNum = 0;
             var nowPercentage = 0; // 用于显示加载每一张图片之后，能够给出百分比
@@ -205,32 +240,6 @@ function loadpngs(url){
                     nowPercentage = nowNum / imgsNum * 100;
                     console.log(nowPercentage + '%');
                 })();
-            };
-        }
-    }
-}
-
-function initModels(){
-    var url = "/live2d/model/model_list.json";
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function() {
-        if (request.status == 200) {
-            var json = JSON.parse(request.responseText);
-            var models = json.models;
-            for(var i = 0; i < models.length - 1; i++){
-                if(Array.isArray(models[i])){
-                    for(var j = 0; j < models[i].length - 1; j++){
-                        var ModelURL = models[i][j];
-                        console.log('live2d', '加载模型' + i + '.' + j);
-                        loadpngs("/live2d/model/" + ModelURL + "/index.json");
-                    }
-                }else{
-                    var ModelURL = models[i];
-                    console.log('live2d', '加载模型' + i);
-                    loadpngs("/live2d/model/" + ModelURL + "/index.json");
-                }
             }
         }
     }
