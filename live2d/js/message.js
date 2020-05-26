@@ -242,7 +242,7 @@ function drawArc(deg) {
     // 设置线头的样式为圆头，默认是方形(不圆润)
     van.lineCap = 'round';
     van.strokeStyle = 'green';
-    van.arc(135, 115, 80, from, to,false);
+    van.arc(135, 115, 80, from, to, false);
     // 清空画布上的文字，这里不是清除整个画布哦
     van.clearRect(75, 100, 100, 50);
     van.font = '18px serif';
@@ -251,10 +251,18 @@ function drawArc(deg) {
     van.stroke();
     van.closePath();
     if(deg >= 360){
-        setTimeout(function () {
-            list = document.getElementById("landlord");
-            list.removeChild(document.getElementById("loading"));
-        },1000);
+        var alpha = 0.5;
+        for (var i = 0; i < 500; i++) {
+            (function(i){
+                setTimeout(function () {
+                    alpha = 0.5 - i / 1000;
+                    van.fillStyle = 'rgba(150, 150, 150, ' + alpha +')';
+                }, 1000);
+            })(i);
+        }
+        while(alpha > 0);
+        list = document.getElementById("landlord");
+        list.removeChild(document.getElementById("loading"));
     }
 }
 
