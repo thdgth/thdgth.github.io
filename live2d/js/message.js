@@ -280,9 +280,10 @@ function loadRandModel(model = in_rand){
                     numid = 0;
             }
             var ModelURL = null;
-            if (Array.isArray(models[numid]))
+            if (Array.isArray(models[numid])){
                 ModelURL = models[numid][0];
-            else ModelURL = models[numid];
+                clothid = 0;
+            }else ModelURL = models[numid];
             loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
             showMessage(messages[numid], 3000, true);
         }
