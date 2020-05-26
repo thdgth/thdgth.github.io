@@ -191,6 +191,10 @@ function loadpngs(url){
     }
 }
 
+function sleep(d){
+  for(var t = Date.now();Date.now() - t <= d;);
+}
+
 function initModels(){
     var url = "/live2d/model/model_list.json";
     var request = new XMLHttpRequest();
@@ -219,7 +223,11 @@ function initModels(){
                     loadpngs("/live2d/model/" + ModelURL + "/index.json");
                 }
             }
-            while(modelnums > 0);
+            var tempwhilenums = 60;
+            while(modelnums > 0 && tempwhilenums > 0){
+                sleep(1);
+                console.log('剩余' + modelnums + '个json正在读取中,' + tempwhilenums + '秒后将强制读取');
+            }
             var imgsNum = loadImg.length;
             var nowNum = 0;
             var nowPercentage = 0; // 用于显示加载每一张图片之后，能够给出百分比

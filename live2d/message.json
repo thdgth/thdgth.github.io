@@ -1,7 +1,7 @@
 {
     "mouseover": [
         {
-            "selector": "a h2",
+            "selector": ".post-title",
             "text": ["要看看<span style=\"color:#0099cc;\">{text}</span>这篇文章么？"]
         },
         {
