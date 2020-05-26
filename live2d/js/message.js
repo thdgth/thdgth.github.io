@@ -178,6 +178,8 @@ var numid;
 var clothid;
 var modelnums;
 var loadImg = [];
+const can = document.getElementById('live2d');
+const van = can.getContext('2d');
 
 function loadpngs(url){
     var request = new XMLHttpRequest();
@@ -196,10 +198,11 @@ function loadpngs(url){
 
 function load_callback(){
     modelnums--;
-    if(modelnums > 0){
-        console.log('剩余' + modelnums + '个json正在读取中');
-    }else{
-        console.log('开始加载图片');
+    if(modelnums == 0){
+        //绘制进度条
+        // 先绘制背景，这里只绘制一次，跟水平进度条不一样呢
+        drawCircle();
+
         var imgsNum = loadImg.length;
         var nowNum = 0;
         var nowPercentage = 0; // 用于显示加载每一张图片之后，能够给出百分比
@@ -209,7 +212,6 @@ function load_callback(){
             // 每一次i变化之后，都需要执行这样的内容 - 创建一个img对象，将img对象的src设置为相应的图片地址
             var newImg = new Image();
             newImg.src = loadImg[i];
-            console.log('加载图片' + loadImg[i]);
          
             // 每一张图片加载完成之后，都可以执行相应的功能，比如我们在制作loading条时，希望每加载一张图片之后就能够将当前进度显示出来，就可以用这个方法
             newImg.onload = (function() {
@@ -219,10 +221,40 @@ function load_callback(){
                     // 加载完成一张图片之后，我们还可以判断是否完成了所有图片的加载，如果完成再执行相应的内容
                 };
                 nowPercentage = nowNum / imgsNum * 100;
-                console.log(nowPercentage + '%');
+                drawArc(nowPercentage * 360);
             })();
         }
     }
+    loadRandModel();
+}
+
+function drawArc(deg) {
+    // 计算deg次时的开始角度
+    let from = (Math.PI/180)*deg;
+    // 计算deg次时的结束角度
+    let to = (Math.PI/180)*deg + Math.PI/180;
+    van.beginPath();
+    van.lineWidth = 6;
+    // 设置线头的样式为圆头，默认是方形(不圆润)
+    van.lineCap = 'round';
+    van.strokeStyle = 'green';
+    van.arc(200,200,80,from,to,false);
+    // 清空画布上的文字，这里不是清除整个画布哦
+    van.clearRect(180,180,50,50);
+    van.font = '18px serif';
+    let text = (deg / 360 * 100).toFixed(2) + '%';
+    van.fillText(text,190,200);
+    van.stroke();
+    van.closePath();
+}
+
+function drawCircle() {
+    van.beginPath();
+    van.lineWidth = 6;
+    van.strokeStyle = '#ccc';
+    van.arc(200,200,80,0,Math.PI*2,false);
+    van.stroke();
+    van.closePath()
 }
 
 function initModels(){
