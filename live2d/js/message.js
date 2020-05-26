@@ -251,18 +251,10 @@ function drawArc(deg) {
     van.stroke();
     van.closePath();
     if(deg >= 360){
-        var alpha = 0.5;
-        for (var i = 0; i < 500; i++) {
-            (function(i){
-                setTimeout(function () {
-                    alpha = 0.5 - i / 1000;
-                    van.fillStyle = 'rgba(150, 150, 150, ' + alpha +')';
-                }, 1000);
-            })(i);
-        }
-        while(alpha > 0);
-        list = document.getElementById("landlord");
-        list.removeChild(document.getElementById("loading"));
+        setTimeout(function () {
+            list = document.getElementById("landlord");
+            list.removeChild(document.getElementById("loading"));
+        },1000);
     }
 }
 
