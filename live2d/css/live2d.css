@@ -15,8 +15,7 @@
     left: 0px;
     bottom: 0px;
     margin: 20px;
-    background: #ffffff;
-    border: thin solid #aaaaaa;
+    background:rgba(255, 255, 255, 0);
 }
 
 #loading {
@@ -24,7 +23,7 @@
     left: 0px;
     bottom: 0px;
     margin: 20px;
-    border: thin solid #aaaaaa;
+    background:rgba(50, 50, 50, 50);
 }
 
 .message {
