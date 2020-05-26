@@ -198,10 +198,7 @@ function loadpngs(url){
 
 function load_callback(){
     modelnums--;
-    if(modelnums > 0){
-        console.log('剩余' + modelnums + '个json正在读取中');
-    }else{
-        console.log('开始加载图片');
+    if(modelnums == 0){
         //绘制进度条
         // 先绘制背景，这里只绘制一次，跟水平进度条不一样呢
         drawCircle();
@@ -226,7 +223,6 @@ function load_callback(){
                             // 加载完成一张图片之后，我们还可以判断是否完成了所有图片的加载，如果完成再执行相应的内容
                         };
                         nowPercentage = nowNum / imgsNum;
-                        console.log(nowPercentage * 100 + '%');
                         drawArc(nowPercentage * 360);
                     })();
                 },1000);
