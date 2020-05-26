@@ -250,7 +250,7 @@ function drawArc(deg) {
         setTimeout(function () {
             list = document.getElementById("landlord");
             list.removeChild(document.getElementById("loading"));
-        },100)
+        },100);
     }
 }
 
@@ -260,7 +260,7 @@ function drawCircle() {
     van.strokeStyle = '#ccc';
     van.arc(135, 115, 80, 0,Math.PI * 2, false);
     van.stroke();
-    van.closePath()
+    van.closePath();
 }
 
 function initModels(){
