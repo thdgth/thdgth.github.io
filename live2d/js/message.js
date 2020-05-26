@@ -198,7 +198,10 @@ function loadpngs(url){
 
 function load_callback(){
     modelnums--;
-    if(modelnums == 0){
+    if(modelnums > 0){
+        console.log('剩余' + modelnums + '个json正在读取中');
+    }else{
+        console.log('开始加载图片');
         //绘制进度条
         // 先绘制背景，这里只绘制一次，跟水平进度条不一样呢
         drawCircle();
@@ -223,6 +226,7 @@ function load_callback(){
                             // 加载完成一张图片之后，我们还可以判断是否完成了所有图片的加载，如果完成再执行相应的内容
                         };
                         nowPercentage = nowNum / imgsNum;
+                        console.log(nowPercentage * 100 + '%');
                         drawArc(nowPercentage * 360);
                     })();
                 },1000);
@@ -251,10 +255,18 @@ function drawArc(deg) {
     van.stroke();
     van.closePath();
     if(deg >= 360){
-        setTimeout(function () {
-            list = document.getElementById("landlord");
-            list.removeChild(document.getElementById("loading"));
-        },1000);
+        var alpha = 0.5;
+        for (var i = 0; i < 500; i++) {
+            (function(i){
+                setTimeout(function () {
+                    alpha = 0.5 - i / 1000;
+                    van.fillStyle = 'rgba(150, 150, 150, ' + alpha +')';
+                }, 1000);
+            })(i);
+        }
+        while(alpha > 0);
+        list = document.getElementById("landlord");
+        list.removeChild(document.getElementById("loading"));
     }
 }
 
