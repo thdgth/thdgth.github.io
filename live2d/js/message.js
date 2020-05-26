@@ -252,7 +252,7 @@ function drawArc(deg) {
     van.closePath();
     if(deg >= 360){
         setTimeout(function () {
-            list = document.getElementById("landlord");
+            var list = document.getElementById("landlord");
             list.removeChild(document.getElementById("loading"));
         }, 1000);
     }
@@ -268,31 +268,40 @@ function drawCircle() {
 }
 
 function initModels(){
-    var url = "/live2d/model/model_list.json";
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function() {
-        if (request.status == 200) {
-            var json = JSON.parse(request.responseText);
-            var models = json.models;
-            modelnums = models.length;
-            for(var i = 0; i < models.length; i++){
-                if(Array.isArray(models[i])){
-                    modelnums += models[i].length - 1;
+    if(sessionStorage.getItem("isReload")){
+        console.log("不是第一次进该页面");
+        var list = document.getElementById("landlord");
+        list.removeChild(document.getElementById("loading"));
+        loadRandModel();
+    }else{
+        console.log("是首次加载页面，开始缓存live2d");
+        sessionStorage.setItem("isReload", true);
+        var url = "/live2d/model/model_list.json";
+        var request = new XMLHttpRequest();
+        request.open("get", url);
+        request.send(null);
+        request.onload = function() {
+            if (request.status == 200) {
+                var json = JSON.parse(request.responseText);
+                var models = json.models;
+                modelnums = models.length;
+                for(var i = 0; i < models.length; i++){
+                    if(Array.isArray(models[i])){
+                        modelnums += models[i].length - 1;
+                    }
                 }
-            }
-            for(var i = 0; i < models.length; i++){
-                if(Array.isArray(models[i])){
-                    for(var j = 0; j < models[i].length; j++){
-                        var ModelURL = models[i][j];
-                        console.log('live2d', '加载模型' + i + '.' + j);
+                for(var i = 0; i < models.length; i++){
+                    if(Array.isArray(models[i])){
+                        for(var j = 0; j < models[i].length; j++){
+                            var ModelURL = models[i][j];
+                            console.log('live2d', '加载模型' + i + '.' + j);
+                            loadpngs("/live2d/model/" + ModelURL + "/index.json");
+                        }
+                    }else{
+                        var ModelURL = models[i];
+                        console.log('live2d', '加载模型' + i);
                         loadpngs("/live2d/model/" + ModelURL + "/index.json");
                     }
-                }else{
-                    var ModelURL = models[i];
-                    console.log('live2d', '加载模型' + i);
-                    loadpngs("/live2d/model/" + ModelURL + "/index.json");
                 }
             }
         }
