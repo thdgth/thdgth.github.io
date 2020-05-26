@@ -211,7 +211,7 @@ function load_callback(){
         var nowPercentage = 0; // 用于显示加载每一张图片之后，能够给出百分比
         // 通过for循环，针对loadImg整个数组进行遍历
         for (var i = 0; i < imgsNum; i++) {
-            (function(){
+            (function(i){
                 setTimeout(function(){
                     // 每一次i变化之后，都需要执行这样的内容 - 创建一个img对象，将img对象的src设置为相应的图片地址
                     var newImg = new Image();
@@ -230,7 +230,7 @@ function load_callback(){
                         drawArc(nowPercentage * 360);
                     })();
                 },1000);
-            })();
+            })(i);
         }
         loadRandModel();
     }
