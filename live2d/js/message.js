@@ -204,15 +204,15 @@ function initModels(){
         if (request.status == 200) {
             var json = JSON.parse(request.responseText);
             var models = json.models;
-            modelnums = models.length - 1;
-            for(var i = 0; i < models.length - 1; i++){
+            modelnums = models.length;
+            for(var i = 0; i < models.length; i++){
                 if(Array.isArray(models[i])){
-                    modelnums += models[i].length - 2;
+                    modelnums += models[i].length - 1;
                 }
             }
-            for(var i = 0; i < models.length - 1; i++){
+            for(var i = 0; i < models.length; i++){
                 if(Array.isArray(models[i])){
-                    for(var j = 0; j < models[i].length - 1; j++){
+                    for(var j = 0; j < models[i].length; j++){
                         var ModelURL = models[i][j];
                         console.log('live2d', '加载模型' + i + '.' + j);
                         loadpngs("/live2d/model/" + ModelURL + "/index.json");
