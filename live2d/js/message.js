@@ -221,7 +221,11 @@ function load_callback(){
                     // 加载完成一张图片之后，我们还可以判断是否完成了所有图片的加载，如果完成再执行相应的内容
                 };
                 nowPercentage = nowNum / imgsNum;
-                drawArc(nowPercentage * 360);
+                (function(){
+                    setTimeout(function(){
+                        drawArc(nowPercentage * 360);
+                    }, 100);
+                })();
             })();
         }
         loadRandModel();
@@ -250,7 +254,7 @@ function drawArc(deg) {
         setTimeout(function () {
             list = document.getElementById("landlord");
             list.removeChild(document.getElementById("loading"));
-        },100);
+        },1000);
     }
 }
 
