@@ -1,3 +1,6 @@
+var in_rand = 1;
+var in_order = 2;
+
 function renderTip(template, context) {
     var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
     return template.replace(tokenReg, function (word, slash1, token, slash2) {
@@ -30,7 +33,7 @@ $('.tool .fui-home').click(function (){
 });
 
 $('.tool .fui-eye').click(function (){
-    loadRandModel();
+    loadRandModel(in_order);
 });
 
 $('.tool .fui-chat').click(function (){
@@ -38,7 +41,7 @@ $('.tool .fui-chat').click(function (){
 });
 
 $('.tool .fui-user').click(function (){
-    loadRandModelClothes();
+    loadRandModelClothes(in_order);
 });
 
 $('.tool .fui-info-circle').click(function (){
@@ -254,7 +257,7 @@ function initModels(){
     }
 }
 
-function loadRandModel(){
+function loadRandModel(model = in_rand){
     var url = "/live2d/model/model_list.json";
     var request = new XMLHttpRequest();
     request.open("get", url);
@@ -264,12 +267,18 @@ function loadRandModel(){
             var json = JSON.parse(request.responseText);
             var models = json.models;
             var messages = json.messages;
-            var length = models.length - 1;
-            var randid;
-            do{
-                randid = Math.round(Math.random() * length);
-            }while(numid == randid);
-            numid = randid;
+            if(model == in_rand){
+                var length = models.length - 1;
+                var randid;
+                do{
+                    randid = Math.round(Math.random() * length);
+                }while(numid == randid);
+                numid = randid;
+            }else if(model == in_order){
+                numid++;
+                if(numid == models.length)
+                    numid = 0;
+            }
             var ModelURL = null;
             if (Array.isArray(models[numid]))
                 ModelURL = models[numid][0];
@@ -280,7 +289,7 @@ function loadRandModel(){
     }
 }
 
-function loadRandModelClothes(){
+function loadRandModelClothes(model = in_rand){
     var url = "/live2d/model/model_list.json";
     var request = new XMLHttpRequest();
     request.open("get", url);
@@ -290,12 +299,18 @@ function loadRandModelClothes(){
             var json = JSON.parse(request.responseText);
             var models = json.models;
             if (Array.isArray(models[numid])){
-                var Length = models[numid].length - 1;
-                var randid;
-                do{
-                    randid = Math.round(Math.random() * Length);
-                }while(clothid == randid);
-                clothid = randid;
+                if(model == in_rand){
+                    var Length = models[numid].length - 1;
+                    var randid;
+                    do{
+                        randid = Math.round(Math.random() * Length);
+                    }while(clothid == randid);
+                    clothid = randid;
+                }else if(model == in_order){
+                    clothid++;
+                    if(clothid == models[numid].length)
+                        clothid = 0;
+                }
                 var ModelURL = models[numid][clothid];
                 loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
                 showMessage('我的新衣服好看嘛', 3000, true);
