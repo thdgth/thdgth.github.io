@@ -220,7 +220,7 @@ function load_callback(){
                 if (nowNum == imgsNum) {
                     // 加载完成一张图片之后，我们还可以判断是否完成了所有图片的加载，如果完成再执行相应的内容
                 };
-                nowPercentage = nowNum / imgsNum * 100;
+                nowPercentage = nowNum / imgsNum;
                 drawArc(nowPercentage * 360);
             })();
         }
