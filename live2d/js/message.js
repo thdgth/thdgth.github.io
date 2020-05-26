@@ -248,7 +248,8 @@ function drawArc(deg) {
     van.closePath();
     if(deg >= 360){
         setTimeout(function () {
-            van.clearRect(0,0,280,250);
+            list = document.getElementById("landlord");
+            list.removeChild(document.getElementById("loading"));
         },100)
     }
 }

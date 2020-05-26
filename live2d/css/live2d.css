@@ -16,6 +16,7 @@
     bottom: 0px;
     margin: 20px;
     background:rgba(255, 255, 255, 0);
+    z-index: 1;
 }
 
 #loading {
@@ -23,7 +24,7 @@
     left: 0px;
     bottom: 0px;
     margin: 20px;
-    background:rgba(50, 50, 50, 50);
+    background:rgba(50, 50, 50, .5);
 }
 
 .message {
