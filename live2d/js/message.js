@@ -184,7 +184,7 @@ function loadpngs(url){
         if (request.status == 200) {
             var json = JSON.parse(request.responseText);
             var textures = json.textures;
-            for(var i = 0; i < textures.length - 1; i++)
+            for(var i = 0; i < textures.length; i++)
                 loadImg.push(url.substring(0, url.lastIndexOf('/')) + '/' + textures[i]);
             load_callback();
         }
@@ -206,6 +206,7 @@ function load_callback(){
             // 每一次i变化之后，都需要执行这样的内容 - 创建一个img对象，将img对象的src设置为相应的图片地址
             var newImg = new Image();
             newImg.src = loadImg[i];
+            console.log('加载图片' + loadImg[i]);
          
             // 每一张图片加载完成之后，都可以执行相应的功能，比如我们在制作loading条时，希望每加载一张图片之后就能够将当前进度显示出来，就可以用这个方法
             newImg.onload = (function() {
