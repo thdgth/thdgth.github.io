@@ -178,7 +178,7 @@ var numid;
 var clothid;
 var modelnums;
 var loadImg = [];
-const can = document.getElementById('live2d');
+const can = document.getElementById('loading');
 const van = can.getContext('2d');
 
 function loadpngs(url){
@@ -238,21 +238,26 @@ function drawArc(deg) {
     // 设置线头的样式为圆头，默认是方形(不圆润)
     van.lineCap = 'round';
     van.strokeStyle = 'green';
-    van.arc(200,200,80,from,to,false);
+    van.arc(135, 115, 80, from, to,false);
     // 清空画布上的文字，这里不是清除整个画布哦
-    van.clearRect(180,180,50,50);
+    van.clearRect(75, 100, 100, 50);
     van.font = '18px serif';
     let text = (deg / 360 * 100).toFixed(2) + '%';
-    van.fillText(text,190,200);
+    van.fillText(text, 105, 123);
     van.stroke();
     van.closePath();
+    if(deg >= 360){
+        setTimeout(function () {
+            van.clearRect(0,0,280,250);
+        },100)
+    }
 }
 
 function drawCircle() {
     van.beginPath();
     van.lineWidth = 6;
     van.strokeStyle = '#ccc';
-    van.arc(200,200,80,0,Math.PI*2,false);
+    van.arc(135, 115, 80, 0,Math.PI * 2, false);
     van.stroke();
     van.closePath()
 }

@@ -11,7 +11,20 @@
 }
 
 #live2d {
-    position: relative;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    margin: 20px;
+    background: #ffffff;
+    border: thin solid #aaaaaa;
+}
+
+#loading {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    margin: 20px;
+    border: thin solid #aaaaaa;
 }
 
 .message {
