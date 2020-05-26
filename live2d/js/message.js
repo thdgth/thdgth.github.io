@@ -227,6 +227,7 @@ function initModels(){
             while(modelnums > 0 && tempwhilenums > 0){
                 sleep(1);
                 console.log('剩余' + modelnums + '个json正在读取中,' + tempwhilenums + '秒后将强制读取');
+                tempwhilenums--;
             }
             var imgsNum = loadImg.length;
             var nowNum = 0;
