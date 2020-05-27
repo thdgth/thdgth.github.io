@@ -2,7 +2,8 @@
     "mouseover": [
         {
             "selector": ".post-preview",
-            "text": ["要看看<span style=\"color:#0099cc;\">{text.post-title}</span>这篇文章么？"]
+            "text-selector": ".post-title",
+            "text": ["要看看<span style=\"color:#0099cc;\">{text}</span>这篇文章么？"]
         },
         {
             "selector": ".catalog-tip",

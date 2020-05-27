@@ -77,7 +77,11 @@ $('.tool .fui-photo').click(function (){
                     $(tips.selector).mouseover(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        text = text.renderTip({text: $(this).text()});
+                        if(tips.hasOwnProperty("text-selector")){
+                            text = text.renderTip({text: $(this).$(tips.text-selector).text()});
+                        }else{
+                            text = text.renderTip({text: $(this).text()});
+                        }
                         showMessage(text, 3000);
                     });
                 }else{
