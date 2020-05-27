@@ -18,6 +18,10 @@
             "text": ["要去拜访我的朋友<span style=\"color:#0099cc;\">{text}</span>吗？"]
         },
         {
+            "selector": ".container a[href^='http']",
+            "text": ["要看看 <span style=\"color:#0099cc;\">{text}</span> 么？"]
+        },
+        {
             "selector": "#tor_show",
             "text": ["翻页比较麻烦吗，点击可以显示这篇文章的目录呢"]
         },

@@ -77,7 +77,10 @@ $('.tool .fui-photo').click(function (){
                     $(tips.selector).mouseover(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        text = text.renderTip({text: $(this).text()});
+                        if(tips.hasOwnProperty("textselector"))
+                            text = text.renderTip({text: $(tips.textselector).text()});
+                        else
+                            text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
                     });
                 }else{
@@ -85,7 +88,7 @@ $('.tool .fui-photo').click(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(this, tips.textselector).text()});
+                            text = text.renderTip({text: $(tips.textselector).text()});
                         else
                             text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
@@ -97,14 +100,20 @@ $('.tool .fui-photo').click(function (){
                     $(tips.selector).click(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        text = text.renderTip({text: $(this).text()});
+                        if(tips.hasOwnProperty("textselector"))
+                            text = text.renderTip({text: $(tips.textselector).text()});
+                        else
+                            text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
                     });
                 }else{
                     $(document).on('click', tips.selector, function(e){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        text = text.renderTip({text: $(this).text()});
+                        if(tips.hasOwnProperty("textselector"))
+                            text = text.renderTip({text: $(tips.textselector).text()});
+                        else
+                            text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
                     });
                 }
