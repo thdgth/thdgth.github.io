@@ -74,6 +74,7 @@ $('.tool .fui-photo').click(function (){
         success: function (result){
             $.each(result.mouseover, function (index, tips){
                 if($(tips.selector).is('.class')){
+                    showMessage(tips.text-selector, 3000);
                     if(tips.text-selector != undefined){
                         $(tips.selector, tips.text-selector).mouseover(function (){
                             var text = tips.text;
