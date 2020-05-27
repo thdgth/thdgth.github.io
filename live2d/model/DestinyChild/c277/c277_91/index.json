@@ -1,0 +1,30 @@
+{
+  "version": "Sample 1.0.0",
+  "model": "c277_91.moc",
+  "textures": [
+    "textures/texture_00.png"
+  ],
+  "motions": {
+    "attack": [
+      {
+        "file": "c277_91_attack.mtn",
+        "fade_in": 0,
+        "fade_out": 0
+      }
+    ],
+    "hit": [
+      {
+        "file": "c277_91_hit.mtn",
+        "fade_in": 0,
+        "fade_out": 0
+      }
+    ],
+    "idle": [
+      {
+        "file": "\",
+        "fade_in": 0,
+        "fade_out": 0
+      }
+    ]
+  }
+}
