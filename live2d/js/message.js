@@ -78,7 +78,7 @@ $('.tool .fui-photo').click(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector).text()});
+                            text = text.renderTip({text: $(tips.textselector, this).text()});
                         else
                             text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
@@ -88,7 +88,7 @@ $('.tool .fui-photo').click(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector).text()});
+                            text = text.renderTip({text: $(tips.textselector, this).text()});
                         else
                             text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
@@ -101,7 +101,7 @@ $('.tool .fui-photo').click(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector).text()});
+                            text = text.renderTip({text: $(tips.textselector, this).text()});
                         else
                             text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
@@ -111,7 +111,7 @@ $('.tool .fui-photo').click(function (){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector).text()});
+                            text = text.renderTip({text: $(tips.textselector, this).text()});
                         else
                             text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
