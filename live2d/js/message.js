@@ -81,13 +81,13 @@ $('.tool .fui-photo').click(function (){
                         showMessage(text, 3000);
                     });
                 }else{
-                    var Selector = tips.selector;
-                    if(tips.hasOwnProperty("textselector"))
-                        Selector = Selector + " " + tips.textselector;
-                    $(document).on('mouseover', Selector, function(e){
+                    $(document).on('mouseover', tips.selector, function(e){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        text = text.renderTip({text: $(this).text()});
+                        if(tips.hasOwnProperty("textselector"))
+                            text = text.renderTip({text: $(this, tips.textselector).text()});
+                        else
+                            text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
                     });
                 }
