@@ -74,16 +74,21 @@ $('.tool .fui-photo').click(function (){
         success: function (result){
             $.each(result.mouseover, function (index, tips){
                 if($(tips.selector).is('.class')){
-                    $(tips.selector).mouseover(function (){
-                        var text = tips.text;
-                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        if(tips.hasOwnProperty("text-selector")){
-                            text = text.renderTip({text: $(this).$(tips.text-selector).text()});
-                        }else{
+                    if(tips.hasOwnProperty("text-selector")){
+                        $(tips.selector, tips.text-selector).mouseover(function (){
+                            var text = tips.text;
+                            if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                             text = text.renderTip({text: $(this).text()});
-                        }
-                        showMessage(text, 3000);
-                    });
+                            showMessage(text, 3000);
+                        });
+                    }else{
+                        $(tips.selector).mouseover(function (){
+                            var text = tips.text;
+                            if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                            text = text.renderTip({text: $(this).text()});
+                            showMessage(text, 3000);
+                        });
+                    }
                 }else{
                     $(document).on('mouseover', tips.selector, function(e){
                         var text = tips.text;
