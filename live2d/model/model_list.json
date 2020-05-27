@@ -182,15 +182,7 @@
             "HyperdimensionNeptunia/histoire",
             "HyperdimensionNeptunia/histoirenohover"
         ],
-        "KantaiCollection/murakumo",
-        "DestinyChild/c316/c316_02",
-        [
-            "DestinyChild/c277/c277_00",
-            "DestinyChild/c277/c277_01",
-            "DestinyChild/c277/c277_02",
-            "DestinyChild/c277/c277_91",
-            "DestinyChild/c277/c277_92"
-        ]
+        "KantaiCollection/murakumo"
     ],
     "messages": [
         "来自 Potion Maker 的 Pio 酱 ~",
@@ -199,8 +191,6 @@
         "来自 Bilibili Live 的 33 的说",
         "Shizuku Talk ！这里是 Shizuku ~",
         "Nep! Nep! 超次元游戏：海王星 系列",
-        "艦隊これくしょん / 叢雲(むらくも)",
-        "我是来自 Destiny Child 的 炼金术师沃丹，请多关照",
-        "我是谁？我在哪里？"
+        "艦隊これくしょん / 叢雲(むらくも)"
     ]
 }
