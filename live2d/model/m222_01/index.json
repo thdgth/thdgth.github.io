@@ -2,7 +2,7 @@
   "version": "Sample 1.0.0",
   "model": "m222_01.moc",
   "textures": [
-    "texture_00.png"
+    "textures/texture_00.png"
   ],
   "motions": {
     "attack": [
