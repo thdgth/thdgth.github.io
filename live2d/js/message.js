@@ -74,24 +74,17 @@ $('.tool .fui-photo').click(function (){
         success: function (result){
             $.each(result.mouseover, function (index, tips){
                 if($(tips.selector).is('.class')){
-                    showMessage(tips.text-selector, 3000);
-                    if(tips.text-selector != undefined){
-                        $(tips.selector, tips.text-selector).mouseover(function (){
-                            var text = tips.text;
-                            if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                            text = text.renderTip({text: $(this).text()});
-                            showMessage(text, 3000);
-                        });
-                    }else{
-                        $(tips.selector).mouseover(function (){
-                            var text = tips.text;
-                            if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                            text = text.renderTip({text: $(this).text()});
-                            showMessage(text, 3000);
-                        });
-                    }
+                    $(tips.selector).mouseover(function (){
+                        var text = tips.text;
+                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                        text = text.renderTip({text: $(this).text()});
+                        showMessage(text, 3000);
+                    });
                 }else{
-                    $(document).on('mouseover', tips.selector, function(e){
+                    var Selector = tips.selector;
+                    if(tips.hasOwnProperty("textselector"))
+                        Selector = Selector + " " + tips.textselector;
+                    $(document).on('mouseover', Selector, function(e){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         text = text.renderTip({text: $(this).text()});
