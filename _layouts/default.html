@@ -6,12 +6,15 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
 
-    {% include nav.html %}
+	<canvas id="c">
+		
+	    {% include nav.html %}
 
-    {{ content }}
+	    {{ content }}
 
-    {% include footer.html %}
-
+	    {% include footer.html %}
+		
+	</canvas>
 
 <!-- Image to hack wechat -->
 <img src="/img/apple-touch-icon.png" width="0" height="0" />
