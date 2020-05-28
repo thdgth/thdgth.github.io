@@ -375,79 +375,106 @@ function loadRandModelClothes(model = in_rand){
     }
 }
 
-window.onload = function () {
-    C = Math.cos; // cache Math objects
-    S = Math.sin;
-    U = 0;
-    w = window;
-    j = document;
-    d = j.getElementById("c");
-    c = d.getContext("2d");
-    W = d.width = w.innerWidth;
-    H = d.height = w.innerHeight;
-    c.fillRect(0, 0, W, H); // resize <canvas> and draw black rect (default)
-    c.globalCompositeOperation = "lighter"; // switch to additive color application
-    c.lineWidth = 0.2;
-    c.lineCap = "round";
-    var bool = 0, 
-        t = 0; // theta
-    d.onmousemove = function (e) {
-        if(window.T) {
-            if(D==9) { D=Math.random()*15; f(1); }
-            clearTimeout(T);
-        }
-        X = e.pageX; // grab mouse pixel coords
-        Y = e.pageY;
-        a=0; // previous coord.x
-        b=0; // previous coord.y 
-        A = X, // original coord.x
-        B = Y; // original coord.y
-        R=(e.pageX/W * 999>>0)/999;
-        r=(e.pageY/H * 999>>0)/999;
-        U=e.pageX/H * 360 >>0;
-        D=9;
-        g = 360 * Math.PI / 180;
-        T = setInterval(f = function (e) { // start looping spectrum
-            c.save();
-            c.globalCompositeOperation = "source-over"; // switch to additive color application
-            if(e!=1) {
-                c.fillStyle = "rgba(0,0,0,0.02)";
-                c.fillRect(0, 0, W, H); // resize <canvas> and draw black rect (default)
-            }
-            c.restore();
-            i = 25; while(i --) {
-                c.beginPath();
-                if(D > 450 || bool) { // decrease diameter
-                    if(!bool) { // has hit maximum
-                        bool = 1;
-                    }
-                    if(D < 0.1) { // has hit minimum
-                        bool = 0;
-                    }
-                    t -= g; // decrease theta
-                    D -= 0.1; // decrease size
-                }
-                if(!bool) {
-                    t += g; // increase theta
-                    D += 0.1; // increase size
-                }
-                q = (R / r - 1) * t; // create hypotrochoid from current mouse position, and setup variables (see: http://en.wikipedia.org/wiki/Hypotrochoid)
-                x = (R - r) * C(t) + D * C(q) + (A + (X - A) * (i / 25)) + (r - R); // center on xy coords
-                y = (R - r) * S(t) - D * S(q) + (B + (Y - B) * (i / 25));
-                if (a) { // draw once two points are set
-                    c.moveTo(a, b);
-                    c.lineTo(x, y)
-                }
-                c.strokeStyle = "hsla(" + (U % 360) + ",100%,50%,0.75)"; // draw rainbow hypotrochoid
-                c.stroke();
-                a = x; // set previous coord.x
-                b = y; // set previous coord.y
-            }
-            U -= 0.5; // increment hue
-            A = X; // set original coord.x
-            B = Y; // set original coord.y
-        }, 16);
+window.onload = function(){
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    
+    //Make the canvas occupy the full page
+    var W = window.innerWidth, H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+    
+    var particles = [];
+    var mouse = {};
+    
+    //Lets create some particles now
+    var particle_count = 50;
+    for(var i = 0; i < particle_count; i++)
+    {
+        particles.push(new particle());
     }
-    j.onkeydown = function(e) { a=b=0; R += 0.05 }
-    d.onmousemove({pageX:300, pageY:290})
+    
+    //finally some mouse tracking
+    canvas.addEventListener('mousemove', track_mouse, false);
+    
+    function track_mouse(e)
+    {
+        //since the canvas = full page the position of the mouse 
+        //relative to the document will suffice
+        mouse.x = e.pageX;
+        mouse.y = e.pageY;
+    }
+    
+    function particle()
+    {
+        //speed, life, location, life, colors
+        //speed.x range = -2.5 to 2.5 
+        //speed.y range = -15 to -5 to make it move upwards
+        //lets change the Y speed to make it look like a flame
+        this.speed = {x: -2.5+Math.random()*5, y: -15+Math.random()*10};
+        //location = mouse coordinates
+        //Now the flame follows the mouse coordinates
+        if(mouse.x && mouse.y)
+        {
+            this.location = {x: mouse.x, y: mouse.y};
+        }
+        else
+        {
+            this.location = {x: W/2, y: H/2};
+        }
+        //radius range = 10-30
+        this.radius = 10+Math.random()*20;
+        //life range = 20-30
+        this.life = 20+Math.random()*10;
+        this.remaining_life = this.life;
+        //colors
+        this.r = Math.round(Math.random()*255);
+        this.g = Math.round(Math.random()*255);
+        this.b = Math.round(Math.random()*255);
+    }
+    
+    function draw()
+    {
+        //Painting the canvas black
+        //Time for lighting magic
+        //particles are painted with "lighter"
+        //In the next frame the background is painted normally without blending to the 
+        //previous frame
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, W, H);
+        ctx.globalCompositeOperation = "lighter";
+        
+        for(var i = 0; i < particles.length; i++)
+        {
+            var p = particles[i];
+            ctx.beginPath();
+            //changing opacity according to the life.
+            //opacity goes to 0 at the end of life of a particle
+            p.opacity = Math.round(p.remaining_life/p.life*100)/100
+            //a gradient instead of white fill
+            var gradient = ctx.createRadialGradient(p.location.x, p.location.y, 0, p.location.x, p.location.y, p.radius);
+            gradient.addColorStop(0, "rgba("+p.r+", "+p.g+", "+p.b+", "+p.opacity+")");
+            gradient.addColorStop(0.5, "rgba("+p.r+", "+p.g+", "+p.b+", "+p.opacity+")");
+            gradient.addColorStop(1, "rgba("+p.r+", "+p.g+", "+p.b+", 0)");
+            ctx.fillStyle = gradient;
+            ctx.arc(p.location.x, p.location.y, p.radius, Math.PI*2, false);
+            ctx.fill();
+            
+            //lets move the particles
+            p.remaining_life--;
+            p.radius--;
+            p.location.x += p.speed.x;
+            p.location.y += p.speed.y;
+            
+            //regenerate particles
+            if(p.remaining_life < 0 || p.radius < 0)
+            {
+                //a brand new particle replacing the dead one
+                particles[i] = new particle();
+            }
+        }
+    }
+    
+    setInterval(draw, 30);
 }
