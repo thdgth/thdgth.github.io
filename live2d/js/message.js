@@ -63,8 +63,10 @@ $('.tool .fui-cross').click(function (){
 
 $('.tool .fui-photo').click(function (){
     showMessage('照好了嘛，是不是很可爱呢？', 5000, true);
-    window.Live2D.captureName = 'live2d.png';
-    window.Live2D.captureFrame = true;
+    var oCanvas = document.getElementById("live2d");
+    Canvas2Image.saveAsPNG(oCanvas);
+    //window.Live2D.captureName = 'live2d.png';
+    //window.Live2D.captureFrame = true;
 });
 
     $.ajax({
