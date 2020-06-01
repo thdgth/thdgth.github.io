@@ -63,15 +63,15 @@ $('.tool .fui-cross').click(function (){
 
 $('.tool .fui-photo').click(function (){
     showMessage('照好了嘛，是不是很可爱呢？', 5000, true);
-    var oCanvas = document.getElementById("live2d");
-    var oA = document.createElement("a");
-    oA.download = 'live2d.png';// 设置下载的文件名，默认是'下载'
-    oA.href = oCanvas.toDataURL();
-    document.body.appendChild(oA);
-    oA.click();
-    oA.remove(); // 下载之后把创建的元素删除
-    //window.Live2D.captureName = 'live2d.png';
-    //window.Live2D.captureFrame = true;
+    // var oCanvas = document.getElementById("live2d");
+    // var oA = document.createElement("a");
+    // oA.download = 'live2d.png';// 设置下载的文件名，默认是'下载'
+    // oA.href = oCanvas.toDataURL();
+    // document.body.appendChild(oA);
+    // oA.click();
+    // oA.remove(); // 下载之后把创建的元素删除
+    window.Live2D.captureName = 'live2d.png';
+    window.Live2D.captureFrame = true;
 });
 
     $.ajax({
