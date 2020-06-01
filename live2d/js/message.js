@@ -26,7 +26,7 @@ var loadImg = [];
 const can = document.getElementById('loading');
 const van = can.getContext('2d');
 var trigger;
-var iskeeping;
+var iskeeping = false;
 
 function renderTip(template, context) {
     var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
