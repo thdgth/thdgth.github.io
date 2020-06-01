@@ -76,7 +76,7 @@ $('.tool .fui-info-circle').click(function (){
 });
 
 $('.tool .fui-cross').click(function (){
-    //sessionStorage.setItem('waifu-dsiplay', 'none');
+    sessionStorage.setItem('waifu-dsiplay', 'none');
     showMessage('愿你有一天能与重要的人重逢', 1300, true);
     window.setTimeout(function() {$('#landlord').hide();}, 1300);
 });
