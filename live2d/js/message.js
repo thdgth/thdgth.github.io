@@ -102,7 +102,7 @@ $.ajax({
                         text = text.renderTip({text: $(tips.textselector, this).text()});
                     else
                         text = text.renderTip({text: $(this).text()});
-                    showMessage(text, 3000);
+                    showMessage(text, 3000, true);
                     trigger = this;
                 }
             });
@@ -386,7 +386,8 @@ function loadRandModelClothes(model = in_rand){
                 }
                 var ModelURL = models[numid][clothid];
                 loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
-                showMessage('我的新衣服好看嘛', 3000, true);
+                var clothesMessages = ["我的新衣服好看嘛", "眼……眼睛不要乱看！"];
+                showMessage(clothesMessages[Math.round(Math.random())], 3000, true);
             }else{
                 showMessage('我还没有其他衣服呢', 3000, true);
             }
@@ -394,10 +395,11 @@ function loadRandModelClothes(model = in_rand){
     }
 }
 
-document.onkeydown=function(){
-    var e = window.event||arguments[0];
-    if(e.keyCode==123){
-        showMessage('不行！那儿有我的秘密！', 3000, true);
-        return false;
-    }
-}
+// document.onkeydown=function(){
+//     var e = window.event||arguments[0];
+//     if(e.keyCode==123){
+//         var secretMessage = ["不行！那儿有我的秘密！", "我的秘密可不能告诉你呀~"];
+//         showMessage(secretMessage[Math.round(Math.random())], 3000, true);
+//         return false;
+//     }
+// }
