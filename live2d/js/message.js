@@ -153,7 +153,7 @@ $.ajax({
                (after.split('/')[1] <= now.getDate() && now.getDate() <= before.split('/')[1])){
                 var text = tips.text;
                 if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                text = text.render({year: now.getFullYear()});
+                text = text.renderTip({year: now.getFullYear()});
                 showMessage(text, 6000, true);
             }
         });
