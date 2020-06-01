@@ -281,7 +281,7 @@ function drawArc(deg) {
     van.stroke();
     van.closePath();
     if(deg >= 360){
-        $('.loading').fadeTo(1000, 0);
+        $('.loading').delay(500).fadeTo(400, 0);
         setTimeout(function () {
             var list = document.getElementById("landlord");
             list.removeChild(document.getElementById("loading"));
