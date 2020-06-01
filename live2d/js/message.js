@@ -192,9 +192,9 @@ function showHitokoto(){
 function showMessage(text, timeout, flag) {
     if(flag || sessionStorage.getItem('waifu-text') === '' || sessionStorage.getItem('waifu-text') === null){
         if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
-        if (live2d_settings.showF12Message) console.log('[Message]', text.replace(/<[^<>]+>/g,''));
         
         if(flag) sessionStorage.setItem('waifu-text', text);
+        console.log('showMessage', text);
         
         $('.message').stop();
         $('.message').html(text).fadeTo(200, 1);
