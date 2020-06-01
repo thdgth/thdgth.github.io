@@ -21,7 +21,7 @@
             "text": ["翻页比较麻烦吗，点击可以显示这篇文章的目录呢"]
         },
         {
-            "selector": ".gt-container",
+            "selector": ".gt-header-textarea",
             "text": ["想要去评论些什么吗？"]
         },
         {
