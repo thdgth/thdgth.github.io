@@ -26,6 +26,7 @@ var loadImg = [];
 const can = document.getElementById('loading');
 const van = can.getContext('2d');
 var trigger;
+var iskeeping;
 
 function renderTip(template, context) {
     var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
@@ -189,17 +190,18 @@ function showHitokoto(){
     });
 }
 
-function showMessage(text, timeout, flag) {
-    if(flag || sessionStorage.getItem('waifu-text') === '' || sessionStorage.getItem('waifu-text') === null){
+function showMessage(text, timeout, flag = false){
+    if(!iskeeping){
         if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
-        
-        if(flag) sessionStorage.setItem('waifu-text', text);
         console.log('showMessage', text);
-        
         $('.message').stop();
         $('.message').html(text).fadeTo(200, 1);
-        if (timeout === undefined) timeout = 5000;
+        if (timeout === null) timeout = 5000;
         hideMessage(timeout);
+        if(flag){
+            iskeeping = true;
+            setTimeout(function(){ iskeeping = false; }, timeout);
+        }
     }
 }
 
