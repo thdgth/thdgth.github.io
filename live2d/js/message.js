@@ -1,3 +1,22 @@
+/*
+
+    く__,.ヘヽ.　　　　/　,ー､ 〉
+    　　　　　＼ ', !-─‐-i　/　/´
+    　　　 　 ／｀ｰ'　　　 L/／｀ヽ､            Live2D 看板娘 参数设置
+    　　 　 /　 ／,　 /|　 ,　 ,　　　 ',                                           Version 1.4.2
+    　　　ｲ 　/ /-‐/　ｉ　L_ ﾊ ヽ!　 i                            Update 2018.11.12
+    　　　 ﾚ ﾍ 7ｲ｀ﾄ　 ﾚ'ｧ-ﾄ､!ハ|　 |  
+    　　　　 !,/7 '0'　　 ´0iソ| 　 |　　　
+    　　　　 |.从"　　_　　 ,,,, / |./ 　 |             网页添加 Live2D 看板娘
+    　　　　 ﾚ'| i＞.､,,__　_,.イ / 　.i 　|                    https://www.fghrsh.net/post/123.html
+    　　　　　 ﾚ'| | / k_７_/ﾚ'ヽ,　ﾊ.　|           
+    　　　　　　 | |/i 〈|/　 i　,.ﾍ |　i　|    Thanks
+    　　　　　　.|/ /　ｉ： 　 ﾍ!　　＼　|          journey-ad / https://github.com/journey-ad/live2d_src
+    　　　 　 　 kヽ>､ﾊ 　 _,.ﾍ､ 　 /､!            xiazeyu / https://github.com/xiazeyu/live2d-widget.js
+    　　　　　　 !'〈//｀Ｔ´', ＼ ｀'7'ｰr'          Live2d Cubism SDK WebGL 2.1 Projrct & All model authors.
+    　　　　　　 ﾚ'ヽL__|___i,___,ンﾚ|ノ
+    　　　　　 　　　ﾄ-,/　|___./
+    　　　　　 　　　'ｰ'　　!_,.:*********************************************************************************/
 var in_rand = 1;
 var in_order = 2;
 var numid; 
@@ -6,6 +25,7 @@ var modelnums;
 var loadImg = [];
 const can = document.getElementById('loading');
 const van = can.getContext('2d');
+var trigger;
 
 function renderTip(template, context) {
     var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
@@ -63,25 +83,19 @@ $('.tool .fui-cross').click(function (){
 
 $('.tool .fui-photo').click(function (){
     showMessage('照好了嘛，是不是很可爱呢？', 5000, true);
-    // var oCanvas = document.getElementById("live2d");
-    // var oA = document.createElement("a");
-    // oA.download = 'live2d.png';// 设置下载的文件名，默认是'下载'
-    // oA.href = oCanvas.toDataURL();
-    // document.body.appendChild(oA);
-    // oA.click();
-    // oA.remove(); // 下载之后把创建的元素删除
     window.Live2D.captureName = 'live2d.png';
     window.Live2D.captureFrame = true;
 });
 
-    $.ajax({
-        cache: true,
-        url: '/live2d/message.json',
-        dataType: "json",
-        success: function (result){
-            $.each(result.mouseover, function (index, tips){
-                if($(tips.selector).is('.class')){
-                    $(tips.selector).mouseover(function (){
+$.ajax({
+    cache: true,
+    url: '/live2d/message.json',
+    dataType: "json",
+    success: function (result){
+        $.each(result.mouseover, function (index, tips){
+            if($(tips.selector).is('.class')){
+                $(tips.selector).mouseover(function (){
+                    if(trigger != this){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         if(tips.hasOwnProperty("textselector"))
@@ -89,9 +103,15 @@ $('.tool .fui-photo').click(function (){
                         else
                             text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
-                    });
-                }else{
-                    $(document).on('mouseover', tips.selector, function(e){
+                        trigger = this;
+                    }
+                });
+                $(tips.selector).mouseleave(function (){
+                    trigger = null;
+                });
+            }else{
+                $(document).on('mouseover', tips.selector, function(e){
+                    if(trigger != this){
                         var text = tips.text;
                         if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                         if(tips.hasOwnProperty("textselector"))
@@ -99,34 +119,45 @@ $('.tool .fui-photo').click(function (){
                         else
                             text = text.renderTip({text: $(this).text()});
                         showMessage(text, 3000);
-                    });
-                }
-            });
-            $.each(result.click, function (index, tips){
-                if($(tips.selector).is('.class')){
-                    $(tips.selector).click(function (){
-                        var text = tips.text;
-                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector, this).text()});
-                        else
-                            text = text.renderTip({text: $(this).text()});
-                        showMessage(text, 3000);
-                    });
-                }else{
-                    $(document).on('click', tips.selector, function(e){
-                        var text = tips.text;
-                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector, this).text()});
-                        else
-                            text = text.renderTip({text: $(this).text()});
-                        showMessage(text, 3000);
-                    });
-                }
-            });
-        }
-    });
+                        trigger = this;
+                    }
+                });
+                $(document).on('mouseleave', tips.selector, function(e){
+                    trigger = null;
+                });
+            }
+        });
+        $.each(result.click, function (index, tips){
+            if($(tips.selector).is('.class')){
+                $(tips.selector).click(function (){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    text = text.renderTip({text: $(this).text()});
+                    showMessage(text, 3000);
+                });
+            }else{
+                $(document).on('click', tips.selector, function(e){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    text = text.renderTip({text: $(this).text()});
+                    showMessage(text, 3000);
+                });
+            }
+        });
+        $.each(result.seasons, function (index, tips){
+            var now = new Date();
+            var after = tips.date.split('-')[0];
+            var before = tips.date.split('-')[1] || after;
+            
+            if((after.split('/')[0] <= now.getMonth()+1 && now.getMonth()+1 <= before.split('/')[0]) && 
+               (after.split('/')[1] <= now.getDate() && now.getDate() <= before.split('/')[1])){
+                var text = getRandText(tips.text);
+                text = text.render({year: now.getFullYear()});
+                showMessage(text, 6000, true);
+            }
+        });
+    }
+});
 
 (function (){
     var text;

@@ -3,7 +3,10 @@
         {
             "selector": ".post-preview",
             "textselector": ".post-title",
-            "text": ["要看看<span style=\"color:#0099cc;\">{text}</span>这篇文章么？"]
+            "text": [
+                "要看看<span style=\"color:#0099cc;\">{text}</span>这篇文章么？",
+                "<span style=\"color:#0099cc;\">{text}</span>这篇文章写的不错,推荐你看看哦~"
+            ]
         },
         {
             "selector": ".catalog-tip",
@@ -35,7 +38,7 @@
         },
         {
             "selector": ".gt-btn-preview",
-            "text": ["想要看看写的评论里的代码会显示成什么样吗？"]
+            "text": ["Markdown语法格式的文章可以点这里预览哦~"]
         },
         {
             "selector": ".gt-btn-public",
@@ -43,31 +46,55 @@
         },
         {
             "selector": ".fui-home",
-            "text": ["回首页看看吧"]
+            "text": [
+                "回首页看看吧",
+                "首页还有很多有意思的文章等待你去阅读哦~"
+            ]
         },
         {
             "selector": ".fui-chat",
-            "text": ["猜猜我要说些什么"]
+            "text": [
+                "猜猜我要说些什么",
+                "来聊天吧~",
+                "一言一语，一颦一笑。一字一句，一颗赛艇。"
+            ]
         },
         {
             "selector": ".fui-eye",
-            "text": ["要切换看板娘吗？"]
+            "text": [
+                "要切换看板娘吗？",
+                "嗯··· 要切换 看板娘 吗？"
+            ]
         },
         {
             "selector": ".fui-user",
-            "text": ["喜欢换装PLAY吗？"]
+            "text": [
+                "喜欢换装PLAY吗？",
+                "换一套衣服，换一种风格~"
+            ]
         },
         {
             "selector": ".fui-photo",
-            "text": ["你要给我拍照呀，一二三~茄子~~"]
+            "text": [
+                "你要给我拍照呀，一二三~茄子~~",
+                "开美颜了吗？",
+                "要拍张纪念照片吗？"
+            ]
         },
         {
             "selector": ".fui-info-circle",
-            "text": ["想要知道更多关于我的事情吗？"]
+            "text": [
+                "想要知道更多关于我的事情吗？",
+                "想知道怎么把我添加到网页吗？",
+                "这里有关于我的信息呢"
+            ]
         },
         {
             "selector": ".fui-cross",
-            "text": ["到了要说再见的时候了吗QAQ"]
+            "text": [
+                "到了要说再见的时候了吗QAQ",
+                "你不喜欢我了吗..."
+            ]
         },
         {
             "selector": "#night_mode",
@@ -153,56 +180,77 @@
     "click": [
         {
             "selector": "#landlord #live2d",
-            "text": ["是…是不小心碰到了吧", "萝莉控是什么呀", "不要动手动脚的！快把手拿开~~", "真…真的是不知羞耻！","再摸的话我可要报警了！⌇●﹏●⌇", "110吗，这里有个变态一直在摸我(ó﹏ò｡)"]
+            "text": [
+                "是…是不小心碰到了吧",
+                "萝莉控是什么呀",
+                "你看到我的小熊了吗",
+                "不要动手动脚的！快把手拿开~~",
+                "真…真的是不知羞耻！",
+                "再摸的话我可要报警了！⌇●﹏●⌇",
+                "110吗，这里有个变态一直在摸我(ó﹏ò｡)"
+            ]
         }
-    ],"seasons": [
+    ],
+    "seasons": [
         {
             "date": "01/01",
-            "text": "<span style=\"color:#0099cc;\">元旦</span>了呢，新的一年又开始了，今年是{year}年~"
+            "text": ["<span style=\"color:#0099cc;\">元旦</span>了呢，新的一年又开始了，今年是{year}年~"]
         },
         {
             "date": "02/14",
-            "text": "又是一年<span style=\"color:#0099cc;\">情人节</span>，{year}年找到对象了嘛~"
+            "text": ["又是一年<span style=\"color:#0099cc;\">情人节</span>，{year}年找到对象了嘛~"]
+        },
+        {
+            "date": "03/07",
+            "text": ["今天是<span style=\"color:#0099cc;\">女神节</span>！"]
         },
         {
             "date": "03/08",
-            "text": "今天是<span style=\"color:#0099cc;\">妇女节</span>！"
+            "text": ["今天是<span style=\"color:#0099cc;\">妇女节</span>！"]
         },
         {
             "date": "03/12",
-            "text": "今天是<span style=\"color:#0099cc;\">植树节</span>，要保护环境呀"
+            "text": ["今天是<span style=\"color:#0099cc;\">植树节</span>，要保护环境呀"]
         },
         {
             "date": "04/01",
-            "text": "悄悄告诉你一个秘密~<span style=\"background-color:#34495e;\">今天是愚人节，不要被骗了哦~</span>"
+            "text": ["悄悄告诉你一个秘密~<span style=\"background-color:#34495e;\">今天是愚人节，不要被骗了哦~</span>"]
         },
         {
             "date": "05/01",
-            "text": "今天是<span style=\"color:#0099cc;\">五一劳动节</span>，计划好假期去哪里了吗~"
+            "text": ["今天是<span style=\"color:#0099cc;\">五一劳动节</span>，计划好假期去哪里了吗~"]
+        },
+        {
+            "date": "05/20",
+            "text": ["今天是<span style=\"color:#0099cc;\">520</span>！勇敢地向你心中的那个ta表达爱意吧~"]
         },
         {
             "date": "06/01",
-            "text": "<span style=\"color:#0099cc;\">儿童节</span>了呢，快活的时光总是短暂，要是永远长不大该多好啊…"
+            "text": ["<span style=\"color:#0099cc;\">儿童节</span>了呢，快活的时光总是短暂，要是永远长不大该多好啊…"]
+        },
+        {
+            "date": "06/18",
+            "text": ["今天是<span style=\"color:#0099cc;\">618</span>，一年过去一半了。618活动你剁手了吗？"]
         },
         {
             "date": "09/03",
-            "text": "<span style=\"color:#0099cc;\">中国人民抗日战争胜利纪念日</span>，铭记历史、缅怀先烈、珍爱和平、开创未来。"
+            "text": ["<span style=\"color:#0099cc;\">中国人民抗日战争胜利纪念日</span>，铭记历史、缅怀先烈、珍爱和平、开创未来。"]
         },
         {
             "date": "09/10",
-            "text": "<span style=\"color:#0099cc;\">教师节</span>，在学校要给老师问声好呀~"
+            "text": ["<span style=\"color:#0099cc;\">教师节</span>，在学校要给老师问声好呀~"]
         },
         {
             "date": "10/01",
-            "text": "<span style=\"color:#0099cc;\">国庆节</span>，新中国已经成立69年了呢"
+            "text": ["<span style=\"color:#0099cc;\">国庆节</span>，新中国已经成立69年了呢"]
         },
         {
             "date": "11/05-11/12",
-            "text": "今年的<span style=\"color:#0099cc;\">双十一</span>是和谁一起过的呢~"
+            "text": ["今年的<span style=\"color:#0099cc;\">双十一</span>是和谁一起过的呢~"]
         },
         {
             "date": "12/20-12/31",
-            "text": "这几天是<span style=\"color:#0099cc;\">圣诞节</span>，主人肯定又去剁手买买买了~"
+            "text": ["这几天是<span style=\"color:#0099cc;\">圣诞节</span>，主人肯定又去剁手买买买了~"]
         }
     ]
 }
