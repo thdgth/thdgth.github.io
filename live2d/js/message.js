@@ -77,8 +77,8 @@ $('.tool .fui-info-circle').click(function (){
 });
 
 $('.tool .fui-cross').click(function (){
-    sessionStorage.setItem('waifu-dsiplay', 'none');
     showMessage('愿你有一天能与重要的人重逢', 1300, true);
+    $('#landlord').delay(1000).fadeTo(200, 0);
     window.setTimeout(function() {$('#landlord').hide();}, 1300);
 });
 
@@ -281,6 +281,7 @@ function drawArc(deg) {
     van.stroke();
     van.closePath();
     if(deg >= 360){
+        $('.loading').delay(800).fadeTo(200, 0);
         setTimeout(function () {
             var list = document.getElementById("landlord");
             list.removeChild(document.getElementById("loading"));
