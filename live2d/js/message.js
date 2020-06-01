@@ -191,7 +191,7 @@ function showHitokoto(){
 }
 
 function showMessage(text, timeout, flag = false){
-    if(!iskeeping){
+    if(!iskeeping || flag){
         if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
         console.log('showMessage', text);
         $('.message').stop();
