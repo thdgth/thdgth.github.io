@@ -393,3 +393,11 @@ function loadRandModelClothes(model = in_rand){
         }
     }
 }
+
+document.onkeydown=function(){
+    var e = window.event||arguments[0];
+    if(e.keyCode==123){
+        showMessage('不行！那儿有我的秘密！', 3000, true);
+        return false;
+    }
+}
