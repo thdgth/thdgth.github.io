@@ -50,7 +50,7 @@ String.prototype.renderTip = function (context) {
 };
 
 $(document).on('copy', function (){
-    showMessage('你都复制了些什么呀，转载要记得加上出处哦~~', 5000);
+    showMessage('你都复制了些什么呀，转载要记得加上出处哦~~', 5000, true);
 });
 
 $('.tool .fui-home').click(function (){
@@ -93,56 +93,29 @@ $.ajax({
     dataType: "json",
     success: function (result){
         $.each(result.mouseover, function (index, tips){
-            if($(tips.selector).is('.class')){
-                $(tips.selector).mouseover(function (){
-                    if(trigger != this){
-                        var text = tips.text;
-                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector, this).text()});
-                        else
-                            text = text.renderTip({text: $(this).text()});
-                        showMessage(text, 3000);
-                        trigger = this;
-                    }
-                });
-                $(tips.selector).mouseleave(function (){
-                    trigger = null;
-                });
-            }else{
-                $(document).on('mouseover', tips.selector, function(e){
-                    if(trigger != this){
-                        var text = tips.text;
-                        if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                        if(tips.hasOwnProperty("textselector"))
-                            text = text.renderTip({text: $(tips.textselector, this).text()});
-                        else
-                            text = text.renderTip({text: $(this).text()});
-                        showMessage(text, 3000);
-                        trigger = this;
-                    }
-                });
-                $(document).on('mouseleave', tips.selector, function(e){
-                    trigger = null;
-                });
-            }
+            $(document).on('mouseover', tips.selector, function(e){
+                if(trigger != this){
+                    var text = tips.text;
+                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                    if(tips.hasOwnProperty("textselector"))
+                        text = text.renderTip({text: $(tips.textselector, this).text()});
+                    else
+                        text = text.renderTip({text: $(this).text()});
+                    showMessage(text, 3000);
+                    trigger = this;
+                }
+            });
+            $(document).on('mouseleave', tips.selector, function(e){
+                trigger = null;
+            });
         });
         $.each(result.click, function (index, tips){
-            if($(tips.selector).is('.class')){
-                $(tips.selector).click(function (){
-                    var text = tips.text;
-                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                    text = text.renderTip({text: $(this).text()});
-                    showMessage(text, 3000);
-                });
-            }else{
-                $(document).on('click', tips.selector, function(e){
-                    var text = tips.text;
-                    if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
-                    text = text.renderTip({text: $(this).text()});
-                    showMessage(text, 3000);
-                });
-            }
+            $(document).on('click', tips.selector, function(e){
+                var text = tips.text;
+                if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
+                text = text.renderTip({text: $(this).text()});
+                showMessage(text, 3000, true);
+            });
         });
         $.each(result.seasons, function (index, tips){
             var now = new Date();
@@ -216,13 +189,18 @@ function showHitokoto(){
     });
 }
 
-function showMessage(text, timeout){
-    if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
-    console.log('showMessage', text);
-    $('.message').stop();
-    $('.message').html(text).fadeTo(200, 1);
-    if (timeout === null) timeout = 5000;
-    hideMessage(timeout);
+function showMessage(text, timeout, flag) {
+    if(flag || sessionStorage.getItem('waifu-text') === '' || sessionStorage.getItem('waifu-text') === null){
+        if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
+        if (live2d_settings.showF12Message) console.log('[Message]', text.replace(/<[^<>]+>/g,''));
+        
+        if(flag) sessionStorage.setItem('waifu-text', text);
+        
+        $('.message').stop();
+        $('.message').html(text).fadeTo(200, 1);
+        if (timeout === undefined) timeout = 5000;
+        hideMessage(timeout);
+    }
 }
 
 function hideMessage(timeout){
