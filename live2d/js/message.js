@@ -258,7 +258,7 @@ function load_callback(){
                 },1000);
             })(i);
         }
-        loadRandModel();
+        loadRandModel(in_rand, false);
     }
 }
 
@@ -330,7 +330,7 @@ function initModels(){
     }
 }
 
-function loadRandModel(model = in_rand){
+function loadRandModel(model = in_rand, type = true){
     var url = "/live2d/model/model_list.json";
     var request = new XMLHttpRequest();
     request.open("get", url);
@@ -358,7 +358,7 @@ function loadRandModel(model = in_rand){
                 clothid = 0;
             }else ModelURL = models[numid];
             loadlive2d("live2d", "/live2d/model/" + ModelURL + "/index.json");
-            showMessage(messages[numid], 3000);
+            showMessage(messages[numid], 3000, type);
         }
     }
 }
@@ -390,7 +390,7 @@ function loadRandModelClothes(model = in_rand){
                 var clothesMessages = ["我的新衣服好看嘛", "眼……眼睛不要乱看！"];
                 showMessage(clothesMessages[Math.round(Math.random())], 3000, true);
             }else{
-                showMessage('我还没有其他衣服呢', 3000);
+                showMessage('我还没有其他衣服呢', 3000, true);
             }
         }
     }
